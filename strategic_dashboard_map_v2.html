@@ -1,0 +1,2596 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_71389321908ee4b951625d2bc2e8278b {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+     <div style="position: fixed; bottom: 30px; right: 30px; width: 280px; height: 250px; 
+     border:2px solid grey; z-index:9999; font-size:14px; line-height: 1.6;
+     background-color:rgba(255,255,255,0.9); padding: 15px; border-radius:10px; box-shadow: 3px 3px 5px rgba(0,0,0,0.3);">
+
+     <h4 style="margin-top:0; text-align:center;">📊 전략 대시보드 가이드</h4>
+
+     <div style="margin-bottom: 10px;">
+       <i style="background:#ffd700; width:15px; height:15px; display:inline-block; border-radius:50%; border:1px solid #666; vertical-align:middle;"></i> 
+       <b>기회 점수 (Main)</b><br>
+       <span style="font-size:12px; color:#555; margin-left: 20px;">지도상 수치 = 기회 점수</span>
+     </div>
+
+     <div style="margin-bottom: 10px;">
+       <i style="background:red; width:15px; height:15px; display:inline-block; border-radius:50%; border:1px solid #666; vertical-align:middle;"></i> 
+       <b>배송 위험 (Risk)</b><br>
+       <span style="font-size:12px; color:#555; margin-left: 20px;">지도상 수치 = 여유 기간(일)</span>
+     </div>
+
+     <div style="margin-bottom: 0px;">
+       <i style="background:green; width:15px; height:15px; display:inline-block; border-radius:50%; border:1px solid #666; vertical-align:middle;"></i> 
+       <b>고비용 (Cost)</b><br>
+       <span style="font-size:12px; color:#555; margin-left: 20px;">지도상 수치 = 배송비 비율</span>
+     </div>
+
+     </div>
+     
+    
+            <div class="folium-map" id="map_71389321908ee4b951625d2bc2e8278b" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_71389321908ee4b951625d2bc2e8278b = L.map(
+                "map_71389321908ee4b951625d2bc2e8278b",
+                {
+                    center: [-14.235, -51.9253],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 4,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_bd6ab4d5f7b4f45e67de75d3093fcbd1 = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_bd6ab4d5f7b4f45e67de75d3093fcbd1.addTo(map_71389321908ee4b951625d2bc2e8278b);
+        
+    
+            var feature_group_6e6e14e690a5599bcd300283854b1cf4 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var circle_marker_1c12f3f28e26c844fc8091fbb8265676 = L.circleMarker(
+                [-9.940727717367688, -68.04851602006708],
+                {"bubblingMouseEvents": true, "color": "#4682b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4682b4", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.009774878310887, "stroke": true, "weight": 3}
+            ).addTo(feature_group_6e6e14e690a5599bcd300283854b1cf4);
+        
+    
+            circle_marker_1c12f3f28e26c844fc8091fbb8265676.bindTooltip(
+                `<div>
+                     
+    <h4>State: AC</h4>
+    <b>⭐ Opp Score: 0.000</b><br>
+    📦 Demand: 92<br>
+    😊 Avg Rating: 4.10
+    
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_ae36fc2cf12d85c274c382a79279b6ed = L.marker(
+                [-9.940727717367688, -68.04851602006708],
+                {
+}
+            ).addTo(feature_group_6e6e14e690a5599bcd300283854b1cf4);
+        
+    
+            var div_icon_31783f425ce7d1b09f0bef76c53b9d46 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 10pt; font-weight: bold; color: white; text-align: center; text-shadow: 1px 1px 2px black;\"\u003e0.000\u003c/div\u003e",
+  "iconSize": [100, 20],
+  "iconAnchor": [50, 0],
+  "className": "empty",
+});
+        
+    
+                marker_ae36fc2cf12d85c274c382a79279b6ed.setIcon(div_icon_31783f425ce7d1b09f0bef76c53b9d46);
+            
+    
+            var circle_marker_252b1f7a79d3ef61a1610e86be8c318b = L.circleMarker(
+                [-9.618440411162295, -36.03919702529452],
+                {"bubblingMouseEvents": true, "color": "#4682b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4682b4", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.391394745671048, "stroke": true, "weight": 3}
+            ).addTo(feature_group_6e6e14e690a5599bcd300283854b1cf4);
+        
+    
+            circle_marker_252b1f7a79d3ef61a1610e86be8c318b.bindTooltip(
+                `<div>
+                     
+    <h4>State: AL</h4>
+    <b>⭐ Opp Score: 0.007</b><br>
+    📦 Demand: 444<br>
+    😊 Avg Rating: 3.71
+    
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_4bd122155edefee4ed609e44272fbb23 = L.marker(
+                [-9.618440411162295, -36.03919702529452],
+                {
+}
+            ).addTo(feature_group_6e6e14e690a5599bcd300283854b1cf4);
+        
+    
+            var div_icon_16421e66b8a76cd875196f0c62cb1de9 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 10pt; font-weight: bold; color: white; text-align: center; text-shadow: 1px 1px 2px black;\"\u003e0.007\u003c/div\u003e",
+  "iconSize": [100, 20],
+  "iconAnchor": [50, 0],
+  "className": "empty",
+});
+        
+    
+                marker_4bd122155edefee4ed609e44272fbb23.setIcon(div_icon_16421e66b8a76cd875196f0c62cb1de9);
+            
+    
+            var circle_marker_25ab3ee14a3f42deadb157c6a8d581c4 = L.circleMarker(
+                [-3.201189646612719, -60.06063565408504],
+                {"bubblingMouseEvents": true, "color": "#4682b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4682b4", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.032794334811422, "stroke": true, "weight": 3}
+            ).addTo(feature_group_6e6e14e690a5599bcd300283854b1cf4);
+        
+    
+            circle_marker_25ab3ee14a3f42deadb157c6a8d581c4.bindTooltip(
+                `<div>
+                     
+    <h4>State: AM</h4>
+    <b>⭐ Opp Score: 0.001</b><br>
+    📦 Demand: 164<br>
+    😊 Avg Rating: 4.07
+    
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_867f3da05875a9827cfc5c9f956b100d = L.marker(
+                [-3.201189646612719, -60.06063565408504],
+                {
+}
+            ).addTo(feature_group_6e6e14e690a5599bcd300283854b1cf4);
+        
+    
+            var div_icon_ad290bc530e37fd2b0d97a141a34e9f7 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 10pt; font-weight: bold; color: white; text-align: center; text-shadow: 1px 1px 2px black;\"\u003e0.001\u003c/div\u003e",
+  "iconSize": [100, 20],
+  "iconAnchor": [50, 0],
+  "className": "empty",
+});
+        
+    
+                marker_867f3da05875a9827cfc5c9f956b100d.setIcon(div_icon_ad290bc530e37fd2b0d97a141a34e9f7);
+            
+    
+            var circle_marker_3b6fe4a0e746f844676857566d5eb40e = L.circleMarker(
+                [0.04990799643618848, -51.17225273916242],
+                {"bubblingMouseEvents": true, "color": "#4682b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4682b4", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.0, "stroke": true, "weight": 3}
+            ).addTo(feature_group_6e6e14e690a5599bcd300283854b1cf4);
+        
+    
+            circle_marker_3b6fe4a0e746f844676857566d5eb40e.bindTooltip(
+                `<div>
+                     
+    <h4>State: AP</h4>
+    <b>⭐ Opp Score: 0.000</b><br>
+    📦 Demand: 81<br>
+    😊 Avg Rating: 4.22
+    
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_03059b0dcbfcad7a101930a40df6ed73 = L.marker(
+                [0.04990799643618848, -51.17225273916242],
+                {
+}
+            ).addTo(feature_group_6e6e14e690a5599bcd300283854b1cf4);
+        
+    
+            var div_icon_d30fe6af039c2f630436917b8007d1b9 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 10pt; font-weight: bold; color: white; text-align: center; text-shadow: 1px 1px 2px black;\"\u003e0.000\u003c/div\u003e",
+  "iconSize": [100, 20],
+  "iconAnchor": [50, 0],
+  "className": "empty",
+});
+        
+    
+                marker_03059b0dcbfcad7a101930a40df6ed73.setIcon(div_icon_d30fe6af039c2f630436917b8007d1b9);
+            
+    
+            var circle_marker_3c7c9fa51df8ac15a315573d3ef8e216 = L.circleMarker(
+                [-13.02536382591919, -39.46903492818187],
+                {"bubblingMouseEvents": true, "color": "#4682b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4682b4", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12.964429531065404, "stroke": true, "weight": 3}
+            ).addTo(feature_group_6e6e14e690a5599bcd300283854b1cf4);
+        
+    
+            circle_marker_3c7c9fa51df8ac15a315573d3ef8e216.bindTooltip(
+                `<div>
+                     
+    <h4>State: BA</h4>
+    <b>⭐ Opp Score: 0.049</b><br>
+    📦 Demand: 3754<br>
+    😊 Avg Rating: 3.81
+    
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_caaf00e9da3e66aa2ab7e13651976507 = L.marker(
+                [-13.02536382591919, -39.46903492818187],
+                {
+}
+            ).addTo(feature_group_6e6e14e690a5599bcd300283854b1cf4);
+        
+    
+            var div_icon_627c87c42c55acd74ce2028bf7c6b188 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 10pt; font-weight: bold; color: white; text-align: center; text-shadow: 1px 1px 2px black;\"\u003e0.049\u003c/div\u003e",
+  "iconSize": [100, 20],
+  "iconAnchor": [50, 0],
+  "className": "empty",
+});
+        
+    
+                marker_caaf00e9da3e66aa2ab7e13651976507.setIcon(div_icon_627c87c42c55acd74ce2028bf7c6b188);
+            
+    
+            var circle_marker_b9ec96741c696e610989aa7c90867a14 = L.circleMarker(
+                [-4.328533932939406, -38.959713567837426],
+                {"bubblingMouseEvents": true, "color": "#4682b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4682b4", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 11.136546053587605, "stroke": true, "weight": 3}
+            ).addTo(feature_group_6e6e14e690a5599bcd300283854b1cf4);
+        
+    
+            circle_marker_b9ec96741c696e610989aa7c90867a14.bindTooltip(
+                `<div>
+                     
+    <h4>State: CE</h4>
+    <b>⭐ Opp Score: 0.019</b><br>
+    📦 Demand: 1462<br>
+    😊 Avg Rating: 3.81
+    
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_e59ef3ced20481941f7b29f12b20dedd = L.marker(
+                [-4.328533932939406, -38.959713567837426],
+                {
+}
+            ).addTo(feature_group_6e6e14e690a5599bcd300283854b1cf4);
+        
+    
+            var div_icon_a1316bd9c8df6e0ae1ac7c41a9945325 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 10pt; font-weight: bold; color: white; text-align: center; text-shadow: 1px 1px 2px black;\"\u003e0.019\u003c/div\u003e",
+  "iconSize": [100, 20],
+  "iconAnchor": [50, 0],
+  "className": "empty",
+});
+        
+    
+                marker_e59ef3ced20481941f7b29f12b20dedd.setIcon(div_icon_a1316bd9c8df6e0ae1ac7c41a9945325);
+            
+    
+            var circle_marker_f50e2bcd2b156150aee8d7440e4014dd = L.circleMarker(
+                [-15.810474939565314, -47.970559637658354],
+                {"bubblingMouseEvents": true, "color": "#4682b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4682b4", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.932224456797492, "stroke": true, "weight": 3}
+            ).addTo(feature_group_6e6e14e690a5599bcd300283854b1cf4);
+        
+    
+            circle_marker_f50e2bcd2b156150aee8d7440e4014dd.bindTooltip(
+                `<div>
+                     
+    <h4>State: DF</h4>
+    <b>⭐ Opp Score: 0.016</b><br>
+    📦 Demand: 2227<br>
+    😊 Avg Rating: 4.00
+    
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_8317e5cbc5e1c2fcb59bc158679c471f = L.marker(
+                [-15.810474939565314, -47.970559637658354],
+                {
+}
+            ).addTo(feature_group_6e6e14e690a5599bcd300283854b1cf4);
+        
+    
+            var div_icon_5f9fb9ecc59a4726c576fb6d0e5a0f3d = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 10pt; font-weight: bold; color: white; text-align: center; text-shadow: 1px 1px 2px black;\"\u003e0.016\u003c/div\u003e",
+  "iconSize": [100, 20],
+  "iconAnchor": [50, 0],
+  "className": "empty",
+});
+        
+    
+                marker_8317e5cbc5e1c2fcb59bc158679c471f.setIcon(div_icon_5f9fb9ecc59a4726c576fb6d0e5a0f3d);
+            
+    
+            var circle_marker_661cceb4dceaad76bd4f474c53efdbc0 = L.circleMarker(
+                [-20.143974897208146, -40.491591293904825],
+                {"bubblingMouseEvents": true, "color": "#4682b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4682b4", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.993448932556344, "stroke": true, "weight": 3}
+            ).addTo(feature_group_6e6e14e690a5599bcd300283854b1cf4);
+        
+    
+            circle_marker_661cceb4dceaad76bd4f474c53efdbc0.bindTooltip(
+                `<div>
+                     
+    <h4>State: ES</h4>
+    <b>⭐ Opp Score: 0.017</b><br>
+    📦 Demand: 2231<br>
+    😊 Avg Rating: 3.99
+    
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_5773dc62f2ee351d8a63d935cda5d3ba = L.marker(
+                [-20.143974897208146, -40.491591293904825],
+                {
+}
+            ).addTo(feature_group_6e6e14e690a5599bcd300283854b1cf4);
+        
+    
+            var div_icon_6c1c93281bb9c4a85d24ef0657840a18 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 10pt; font-weight: bold; color: white; text-align: center; text-shadow: 1px 1px 2px black;\"\u003e0.017\u003c/div\u003e",
+  "iconSize": [100, 20],
+  "iconAnchor": [50, 0],
+  "className": "empty",
+});
+        
+    
+                marker_5773dc62f2ee351d8a63d935cda5d3ba.setIcon(div_icon_6c1c93281bb9c4a85d24ef0657840a18);
+            
+    
+            var circle_marker_ae606d19169b21712a6f8a3af228f5f0 = L.circleMarker(
+                [-16.616165551852177, -49.32636957183859],
+                {"bubblingMouseEvents": true, "color": "#4682b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4682b4", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 11.017058829460861, "stroke": true, "weight": 3}
+            ).addTo(feature_group_6e6e14e690a5599bcd300283854b1cf4);
+        
+    
+            circle_marker_ae606d19169b21712a6f8a3af228f5f0.bindTooltip(
+                `<div>
+                     
+    <h4>State: GO</h4>
+    <b>⭐ Opp Score: 0.017</b><br>
+    📦 Demand: 2307<br>
+    😊 Avg Rating: 3.99
+    
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_3304718c707a1234a1114af69dee52fc = L.marker(
+                [-16.616165551852177, -49.32636957183859],
+                {
+}
+            ).addTo(feature_group_6e6e14e690a5599bcd300283854b1cf4);
+        
+    
+            var div_icon_7a6e3705a0564b9938498e82f0ee9eb7 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 10pt; font-weight: bold; color: white; text-align: center; text-shadow: 1px 1px 2px black;\"\u003e0.017\u003c/div\u003e",
+  "iconSize": [100, 20],
+  "iconAnchor": [50, 0],
+  "className": "empty",
+});
+        
+    
+                marker_3304718c707a1234a1114af69dee52fc.setIcon(div_icon_7a6e3705a0564b9938498e82f0ee9eb7);
+            
+    
+            var circle_marker_d204250c00bd039e14a62417d0dd9c53 = L.circleMarker(
+                [-3.5795040474073514, -44.691816568308205],
+                {"bubblingMouseEvents": true, "color": "#4682b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4682b4", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.752452778912623, "stroke": true, "weight": 3}
+            ).addTo(feature_group_6e6e14e690a5599bcd300283854b1cf4);
+        
+    
+            circle_marker_d204250c00bd039e14a62417d0dd9c53.bindTooltip(
+                `<div>
+                     
+    <h4>State: MA</h4>
+    <b>⭐ Opp Score: 0.013</b><br>
+    📦 Demand: 819<br>
+    😊 Avg Rating: 3.72
+    
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_841db0910a07ddba0be7b8ac42b8b816 = L.marker(
+                [-3.5795040474073514, -44.691816568308205],
+                {
+}
+            ).addTo(feature_group_6e6e14e690a5599bcd300283854b1cf4);
+        
+    
+            var div_icon_e67bc7f02aa66ed31709584fc8c04577 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 10pt; font-weight: bold; color: white; text-align: center; text-shadow: 1px 1px 2px black;\"\u003e0.013\u003c/div\u003e",
+  "iconSize": [100, 20],
+  "iconAnchor": [50, 0],
+  "className": "empty",
+});
+        
+    
+                marker_841db0910a07ddba0be7b8ac42b8b816.setIcon(div_icon_e67bc7f02aa66ed31709584fc8c04577);
+            
+    
+            var circle_marker_fc1b6ff0c17ce826842376352a717aa9 = L.circleMarker(
+                [-19.916426309955437, -44.43920745490378],
+                {"bubblingMouseEvents": true, "color": "#9c27b0", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#9c27b0", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 13.469389692905848, "stroke": true, "weight": 3}
+            ).addTo(feature_group_6e6e14e690a5599bcd300283854b1cf4);
+        
+    
+            circle_marker_fc1b6ff0c17ce826842376352a717aa9.bindTooltip(
+                `<div>
+                     
+    <h4>State: MG</h4>
+    <b>⭐ Opp Score: 0.058</b><br>
+    📦 Demand: 13100<br>
+    😊 Avg Rating: 4.09
+    
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_ea9a2da768d62e33b4d9885b12025243 = L.marker(
+                [-19.916426309955437, -44.43920745490378],
+                {
+}
+            ).addTo(feature_group_6e6e14e690a5599bcd300283854b1cf4);
+        
+    
+            var div_icon_562e5e8535b8b7ceb4ecfc7516296f27 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 10pt; font-weight: bold; color: white; text-align: center; text-shadow: 1px 1px 2px black;\"\u003e0.058\u003c/div\u003e",
+  "iconSize": [100, 20],
+  "iconAnchor": [50, 0],
+  "className": "empty",
+});
+        
+    
+                marker_ea9a2da768d62e33b4d9885b12025243.setIcon(div_icon_562e5e8535b8b7ceb4ecfc7516296f27);
+            
+    
+            var circle_marker_cfda24d84cc9728cdff0f3d237c8e0eb = L.circleMarker(
+                [-20.74934508406467, -54.44409803876795],
+                {"bubblingMouseEvents": true, "color": "#4682b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4682b4", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.258183101726072, "stroke": true, "weight": 3}
+            ).addTo(feature_group_6e6e14e690a5599bcd300283854b1cf4);
+        
+    
+            circle_marker_cfda24d84cc9728cdff0f3d237c8e0eb.bindTooltip(
+                `<div>
+                     
+    <h4>State: MS</h4>
+    <b>⭐ Opp Score: 0.004</b><br>
+    📦 Demand: 829<br>
+    😊 Avg Rating: 4.05
+    
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_34262caf296ece4841d9e2c5802f0bc5 = L.marker(
+                [-20.74934508406467, -54.44409803876795],
+                {
+}
+            ).addTo(feature_group_6e6e14e690a5599bcd300283854b1cf4);
+        
+    
+            var div_icon_2545b282e911801544b6e81875a21e2c = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 10pt; font-weight: bold; color: white; text-align: center; text-shadow: 1px 1px 2px black;\"\u003e0.004\u003c/div\u003e",
+  "iconSize": [100, 20],
+  "iconAnchor": [50, 0],
+  "className": "empty",
+});
+        
+    
+                marker_34262caf296ece4841d9e2c5802f0bc5.setIcon(div_icon_2545b282e911801544b6e81875a21e2c);
+            
+    
+            var circle_marker_839ca8373741da22a2109793f776738b = L.circleMarker(
+                [-14.377764929600081, -55.7504571548984],
+                {"bubblingMouseEvents": true, "color": "#4682b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4682b4", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.46292148173932, "stroke": true, "weight": 3}
+            ).addTo(feature_group_6e6e14e690a5599bcd300283854b1cf4);
+        
+    
+            circle_marker_839ca8373741da22a2109793f776738b.bindTooltip(
+                `<div>
+                     
+    <h4>State: MT</h4>
+    <b>⭐ Opp Score: 0.008</b><br>
+    📦 Demand: 1044<br>
+    😊 Avg Rating: 3.98
+    
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_4a506775b28a8ba400241f9f6c1c076a = L.marker(
+                [-14.377764929600081, -55.7504571548984],
+                {
+}
+            ).addTo(feature_group_6e6e14e690a5599bcd300283854b1cf4);
+        
+    
+            var div_icon_3317a3f7b5620b6f934da5623fe4db5b = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 10pt; font-weight: bold; color: white; text-align: center; text-shadow: 1px 1px 2px black;\"\u003e0.008\u003c/div\u003e",
+  "iconSize": [100, 20],
+  "iconAnchor": [50, 0],
+  "className": "empty",
+});
+        
+    
+                marker_4a506775b28a8ba400241f9f6c1c076a.setIcon(div_icon_3317a3f7b5620b6f934da5623fe4db5b);
+            
+    
+            var circle_marker_40c57382aba1667944b8e04473691389 = L.circleMarker(
+                [-2.4085513836712416, -49.0834843221631],
+                {"bubblingMouseEvents": true, "color": "#4682b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4682b4", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.856584238603054, "stroke": true, "weight": 3}
+            ).addTo(feature_group_6e6e14e690a5599bcd300283854b1cf4);
+        
+    
+            circle_marker_40c57382aba1667944b8e04473691389.bindTooltip(
+                `<div>
+                     
+    <h4>State: PA</h4>
+    <b>⭐ Opp Score: 0.014</b><br>
+    📦 Demand: 1064<br>
+    😊 Avg Rating: 3.79
+    
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_dbcfec28400feb3574554a4c627fa76d = L.marker(
+                [-2.4085513836712416, -49.0834843221631],
+                {
+}
+            ).addTo(feature_group_6e6e14e690a5599bcd300283854b1cf4);
+        
+    
+            var div_icon_d661752c375bc3e2ec87713bad929ed5 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 10pt; font-weight: bold; color: white; text-align: center; text-shadow: 1px 1px 2px black;\"\u003e0.014\u003c/div\u003e",
+  "iconSize": [100, 20],
+  "iconAnchor": [50, 0],
+  "className": "empty",
+});
+        
+    
+                marker_dbcfec28400feb3574554a4c627fa76d.setIcon(div_icon_d661752c375bc3e2ec87713bad929ed5);
+            
+    
+            var circle_marker_c346910824d21d97b62c5ebff414f576 = L.circleMarker(
+                [-7.087990320489705, -35.61652648790981],
+                {"bubblingMouseEvents": true, "color": "#4682b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4682b4", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.240193980952492, "stroke": true, "weight": 3}
+            ).addTo(feature_group_6e6e14e690a5599bcd300283854b1cf4);
+        
+    
+            circle_marker_c346910824d21d97b62c5ebff414f576.bindTooltip(
+                `<div>
+                     
+    <h4>State: PB</h4>
+    <b>⭐ Opp Score: 0.004</b><br>
+    📦 Demand: 594<br>
+    😊 Avg Rating: 4.00
+    
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_0d1d698c6a6738d1c86fd1b2c2f0a51a = L.marker(
+                [-7.087990320489705, -35.61652648790981],
+                {
+}
+            ).addTo(feature_group_6e6e14e690a5599bcd300283854b1cf4);
+        
+    
+            var div_icon_6f86f18901dc424221152feceffab61c = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 10pt; font-weight: bold; color: white; text-align: center; text-shadow: 1px 1px 2px black;\"\u003e0.004\u003c/div\u003e",
+  "iconSize": [100, 20],
+  "iconAnchor": [50, 0],
+  "className": "empty",
+});
+        
+    
+                marker_0d1d698c6a6738d1c86fd1b2c2f0a51a.setIcon(div_icon_6f86f18901dc424221152feceffab61c);
+            
+    
+            var circle_marker_fadfb1b83c97da322db1b8992fcf0c91 = L.circleMarker(
+                [-8.1947372659734, -35.766598366817455],
+                {"bubblingMouseEvents": true, "color": "#4682b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4682b4", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.906467972280884, "stroke": true, "weight": 3}
+            ).addTo(feature_group_6e6e14e690a5599bcd300283854b1cf4);
+        
+    
+            circle_marker_fadfb1b83c97da322db1b8992fcf0c91.bindTooltip(
+                `<div>
+                     
+    <h4>State: PE</h4>
+    <b>⭐ Opp Score: 0.015</b><br>
+    📦 Demand: 1792<br>
+    😊 Avg Rating: 3.96
+    
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_b490412cd241c54ef11e0d6186ee629e = L.marker(
+                [-8.1947372659734, -35.766598366817455],
+                {
+}
+            ).addTo(feature_group_6e6e14e690a5599bcd300283854b1cf4);
+        
+    
+            var div_icon_6d4ae70514432b53feaa84dfe943e460 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 10pt; font-weight: bold; color: white; text-align: center; text-shadow: 1px 1px 2px black;\"\u003e0.015\u003c/div\u003e",
+  "iconSize": [100, 20],
+  "iconAnchor": [50, 0],
+  "className": "empty",
+});
+        
+    
+                marker_b490412cd241c54ef11e0d6186ee629e.setIcon(div_icon_6d4ae70514432b53feaa84dfe943e460);
+            
+    
+            var circle_marker_ae777d8c05fb142fc28ba5d332eabb10 = L.circleMarker(
+                [-5.533798014503708, -42.59894315504948],
+                {"bubblingMouseEvents": true, "color": "#4682b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4682b4", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.310170183916112, "stroke": true, "weight": 3}
+            ).addTo(feature_group_6e6e14e690a5599bcd300283854b1cf4);
+        
+    
+            circle_marker_ae777d8c05fb142fc28ba5d332eabb10.bindTooltip(
+                `<div>
+                     
+    <h4>State: PI</h4>
+    <b>⭐ Opp Score: 0.005</b><br>
+    📦 Demand: 535<br>
+    😊 Avg Rating: 3.90
+    
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_05db181f62ca8a9d650fdce35fea6483 = L.marker(
+                [-5.533798014503708, -42.59894315504948],
+                {
+}
+            ).addTo(feature_group_6e6e14e690a5599bcd300283854b1cf4);
+        
+    
+            var div_icon_424bb0a6f2bf56c63c66333b6692c182 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 10pt; font-weight: bold; color: white; text-align: center; text-shadow: 1px 1px 2px black;\"\u003e0.005\u003c/div\u003e",
+  "iconSize": [100, 20],
+  "iconAnchor": [50, 0],
+  "className": "empty",
+});
+        
+    
+                marker_05db181f62ca8a9d650fdce35fea6483.setIcon(div_icon_424bb0a6f2bf56c63c66333b6692c182);
+            
+    
+            var circle_marker_e95ed9dec08abd744efc76afaad625d9 = L.circleMarker(
+                [-24.792963520092677, -50.78029371700814],
+                {"bubblingMouseEvents": true, "color": "#4682b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4682b4", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 11.322189363629487, "stroke": true, "weight": 3}
+            ).addTo(feature_group_6e6e14e690a5599bcd300283854b1cf4);
+        
+    
+            circle_marker_e95ed9dec08abd744efc76afaad625d9.bindTooltip(
+                `<div>
+                     
+    <h4>State: PR</h4>
+    <b>⭐ Opp Score: 0.022</b><br>
+    📦 Demand: 5725<br>
+    😊 Avg Rating: 4.10
+    
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_2593d591fe1ae2642965bb189da68eff = L.marker(
+                [-24.792963520092677, -50.78029371700814],
+                {
+}
+            ).addTo(feature_group_6e6e14e690a5599bcd300283854b1cf4);
+        
+    
+            var div_icon_27d9648a4c091bdd8bb50cd5cfedfc3e = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 10pt; font-weight: bold; color: white; text-align: center; text-shadow: 1px 1px 2px black;\"\u003e0.022\u003c/div\u003e",
+  "iconSize": [100, 20],
+  "iconAnchor": [50, 0],
+  "className": "empty",
+});
+        
+    
+                marker_2593d591fe1ae2642965bb189da68eff.setIcon(div_icon_27d9648a4c091bdd8bb50cd5cfedfc3e);
+            
+    
+            var circle_marker_9975ad07205169993b2d0c5d5972e0da = L.circleMarker(
+                [-22.756395174016212, -43.17504686937467],
+                {"bubblingMouseEvents": true, "color": "#ffd700", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffd700", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 27.655412048427333, "stroke": true, "weight": 3}
+            ).addTo(feature_group_6e6e14e690a5599bcd300283854b1cf4);
+        
+    
+            circle_marker_9975ad07205169993b2d0c5d5972e0da.bindTooltip(
+                `<div>
+                     
+    <h4>State: RJ</h4>
+    <b>⭐ Opp Score: 0.294</b><br>
+    📦 Demand: 14455<br>
+    😊 Avg Rating: 3.81
+    
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_7473eb73e182f3cfa586eae0d869bdb5 = L.marker(
+                [-22.756395174016212, -43.17504686937467],
+                {
+}
+            ).addTo(feature_group_6e6e14e690a5599bcd300283854b1cf4);
+        
+    
+            var div_icon_301a219b3ca724d89ec3942b4f647e2a = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 10pt; font-weight: bold; color: white; text-align: center; text-shadow: 1px 1px 2px black;\"\u003e0.294\u003c/div\u003e",
+  "iconSize": [100, 20],
+  "iconAnchor": [50, 0],
+  "className": "empty",
+});
+        
+    
+                marker_7473eb73e182f3cfa586eae0d869bdb5.setIcon(div_icon_301a219b3ca724d89ec3942b4f647e2a);
+            
+    
+            var circle_marker_39dd6ec89dfd990a0d272f03d4e778d0 = L.circleMarker(
+                [-5.836066164151715, -35.925705800107956],
+                {"bubblingMouseEvents": true, "color": "#4682b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4682b4", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.135691579823305, "stroke": true, "weight": 3}
+            ).addTo(feature_group_6e6e14e690a5599bcd300283854b1cf4);
+        
+    
+            circle_marker_39dd6ec89dfd990a0d272f03d4e778d0.bindTooltip(
+                `<div>
+                     
+    <h4>State: RN</h4>
+    <b>⭐ Opp Score: 0.002</b><br>
+    📦 Demand: 525<br>
+    😊 Avg Rating: 4.08
+    
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_a90a80e16c632885db9c2b4667a84ada = L.marker(
+                [-5.836066164151715, -35.925705800107956],
+                {
+}
+            ).addTo(feature_group_6e6e14e690a5599bcd300283854b1cf4);
+        
+    
+            var div_icon_5b60d0d77abc24502632fa58369d2ad0 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 10pt; font-weight: bold; color: white; text-align: center; text-shadow: 1px 1px 2px black;\"\u003e0.002\u003c/div\u003e",
+  "iconSize": [100, 20],
+  "iconAnchor": [50, 0],
+  "className": "empty",
+});
+        
+    
+                marker_a90a80e16c632885db9c2b4667a84ada.setIcon(div_icon_5b60d0d77abc24502632fa58369d2ad0);
+            
+    
+            var circle_marker_cde6dc384aa996f8db4a4447d8eba939 = L.circleMarker(
+                [-10.13601057111875, -62.83637548425774],
+                {"bubblingMouseEvents": true, "color": "#4682b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4682b4", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.090978183019452, "stroke": true, "weight": 3}
+            ).addTo(feature_group_6e6e14e690a5599bcd300283854b1cf4);
+        
+    
+            circle_marker_cde6dc384aa996f8db4a4447d8eba939.bindTooltip(
+                `<div>
+                     
+    <h4>State: RO</h4>
+    <b>⭐ Opp Score: 0.002</b><br>
+    📦 Demand: 275<br>
+    😊 Avg Rating: 4.01
+    
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_5e97315454ae39c07bf3cc44135e2546 = L.marker(
+                [-10.13601057111875, -62.83637548425774],
+                {
+}
+            ).addTo(feature_group_6e6e14e690a5599bcd300283854b1cf4);
+        
+    
+            var div_icon_115bdf0142d8a652219c7a6f2d0ee174 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 10pt; font-weight: bold; color: white; text-align: center; text-shadow: 1px 1px 2px black;\"\u003e0.002\u003c/div\u003e",
+  "iconSize": [100, 20],
+  "iconAnchor": [50, 0],
+  "className": "empty",
+});
+        
+    
+                marker_5e97315454ae39c07bf3cc44135e2546.setIcon(div_icon_115bdf0142d8a652219c7a6f2d0ee174);
+            
+    
+            var circle_marker_b30a9cd26ed52c63e1f7600b3cdaae6e = L.circleMarker(
+                [2.834404095619739, -60.67707258876818],
+                {"bubblingMouseEvents": true, "color": "#4682b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4682b4", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.0, "stroke": true, "weight": 3}
+            ).addTo(feature_group_6e6e14e690a5599bcd300283854b1cf4);
+        
+    
+            circle_marker_b30a9cd26ed52c63e1f7600b3cdaae6e.bindTooltip(
+                `<div>
+                     
+    <h4>State: RR</h4>
+    <b>⭐ Opp Score: 0.000</b><br>
+    📦 Demand: 52<br>
+    😊 Avg Rating: 3.58
+    
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_ae8290866942441d2f436e8b2493d337 = L.marker(
+                [2.834404095619739, -60.67707258876818],
+                {
+}
+            ).addTo(feature_group_6e6e14e690a5599bcd300283854b1cf4);
+        
+    
+            var div_icon_f6886ddd0d699ae13f0afde09a5e6899 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 10pt; font-weight: bold; color: white; text-align: center; text-shadow: 1px 1px 2px black;\"\u003e0.000\u003c/div\u003e",
+  "iconSize": [100, 20],
+  "iconAnchor": [50, 0],
+  "className": "empty",
+});
+        
+    
+                marker_ae8290866942441d2f436e8b2493d337.setIcon(div_icon_f6886ddd0d699ae13f0afde09a5e6899);
+            
+    
+            var circle_marker_aeafe9bae73a4aa49937122285e68cb7 = L.circleMarker(
+                [-29.71084642275431, -51.95321446518232],
+                {"bubblingMouseEvents": true, "color": "#4682b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4682b4", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12.055947839199101, "stroke": true, "weight": 3}
+            ).addTo(feature_group_6e6e14e690a5599bcd300283854b1cf4);
+        
+    
+            circle_marker_aeafe9bae73a4aa49937122285e68cb7.bindTooltip(
+                `<div>
+                     
+    <h4>State: RS</h4>
+    <b>⭐ Opp Score: 0.034</b><br>
+    📦 Demand: 6261<br>
+    😊 Avg Rating: 4.05
+    
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_5a75d7b25c6d070c7a24b2e10a615661 = L.marker(
+                [-29.71084642275431, -51.95321446518232],
+                {
+}
+            ).addTo(feature_group_6e6e14e690a5599bcd300283854b1cf4);
+        
+    
+            var div_icon_9a4da36fc43f0ffafc4b0d480c34f5f3 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 10pt; font-weight: bold; color: white; text-align: center; text-shadow: 1px 1px 2px black;\"\u003e0.034\u003c/div\u003e",
+  "iconSize": [100, 20],
+  "iconAnchor": [50, 0],
+  "className": "empty",
+});
+        
+    
+                marker_5a75d7b25c6d070c7a24b2e10a615661.setIcon(div_icon_9a4da36fc43f0ffafc4b0d480c34f5f3);
+            
+    
+            var circle_marker_1d3413e1bdbe69c82e0757f309a89a5a = L.circleMarker(
+                [-27.247531562634602, -49.57379005870357],
+                {"bubblingMouseEvents": true, "color": "#4682b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4682b4", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 11.766374318871339, "stroke": true, "weight": 3}
+            ).addTo(feature_group_6e6e14e690a5599bcd300283854b1cf4);
+        
+    
+            circle_marker_1d3413e1bdbe69c82e0757f309a89a5a.bindTooltip(
+                `<div>
+                     
+    <h4>State: SC</h4>
+    <b>⭐ Opp Score: 0.029</b><br>
+    📦 Demand: 4156<br>
+    😊 Avg Rating: 4.00
+    
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_2941f33319f0487e96a15e75ec7631fc = L.marker(
+                [-27.247531562634602, -49.57379005870357],
+                {
+}
+            ).addTo(feature_group_6e6e14e690a5599bcd300283854b1cf4);
+        
+    
+            var div_icon_e11ad2c49897d2e95683607ea9c9fcee = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 10pt; font-weight: bold; color: white; text-align: center; text-shadow: 1px 1px 2px black;\"\u003e0.029\u003c/div\u003e",
+  "iconSize": [100, 20],
+  "iconAnchor": [50, 0],
+  "className": "empty",
+});
+        
+    
+                marker_2941f33319f0487e96a15e75ec7631fc.setIcon(div_icon_e11ad2c49897d2e95683607ea9c9fcee);
+            
+    
+            var circle_marker_f89cf4f99b99e95fad50c52dc95b8c34 = L.circleMarker(
+                [-10.869456899261065, -37.1716593041677],
+                {"bubblingMouseEvents": true, "color": "#4682b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4682b4", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.249278029466447, "stroke": true, "weight": 3}
+            ).addTo(feature_group_6e6e14e690a5599bcd300283854b1cf4);
+        
+    
+            circle_marker_f89cf4f99b99e95fad50c52dc95b8c34.bindTooltip(
+                `<div>
+                     
+    <h4>State: SE</h4>
+    <b>⭐ Opp Score: 0.004</b><br>
+    📦 Demand: 382<br>
+    😊 Avg Rating: 3.84
+    
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_955261cc585188db03e7acc432c02e44 = L.marker(
+                [-10.869456899261065, -37.1716593041677],
+                {
+}
+            ).addTo(feature_group_6e6e14e690a5599bcd300283854b1cf4);
+        
+    
+            var div_icon_2445e881e3c5e7dd3827e147a2d9cf9e = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 10pt; font-weight: bold; color: white; text-align: center; text-shadow: 1px 1px 2px black;\"\u003e0.004\u003c/div\u003e",
+  "iconSize": [100, 20],
+  "iconAnchor": [50, 0],
+  "className": "empty",
+});
+        
+    
+                marker_955261cc585188db03e7acc432c02e44.setIcon(div_icon_2445e881e3c5e7dd3827e147a2d9cf9e);
+            
+    
+            var circle_marker_4d9237b7636ce7e0166c97d2dde5d9a1 = L.circleMarker(
+                [-23.16639945041646, -47.04705120191024],
+                {"bubblingMouseEvents": true, "color": "#9c27b0", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#9c27b0", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18.856994985068162, "stroke": true, "weight": 3}
+            ).addTo(feature_group_6e6e14e690a5599bcd300283854b1cf4);
+        
+    
+            circle_marker_4d9237b7636ce7e0166c97d2dde5d9a1.bindTooltip(
+                `<div>
+                     
+    <h4>State: SP</h4>
+    <b>⭐ Opp Score: 0.148</b><br>
+    📦 Demand: 47383<br>
+    😊 Avg Rating: 4.13
+    
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_3617401d983221630fbbfd71d538a6ea = L.marker(
+                [-23.16639945041646, -47.04705120191024],
+                {
+}
+            ).addTo(feature_group_6e6e14e690a5599bcd300283854b1cf4);
+        
+    
+            var div_icon_18610b225148c8488075dd80c3773b47 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 10pt; font-weight: bold; color: white; text-align: center; text-shadow: 1px 1px 2px black;\"\u003e0.148\u003c/div\u003e",
+  "iconSize": [100, 20],
+  "iconAnchor": [50, 0],
+  "className": "empty",
+});
+        
+    
+                marker_3617401d983221630fbbfd71d538a6ea.setIcon(div_icon_18610b225148c8488075dd80c3773b47);
+            
+    
+            var circle_marker_7849766ae7bf7ce9c88024d198cd42a6 = L.circleMarker(
+                [-9.750721030945575, -48.36419014293379],
+                {"bubblingMouseEvents": true, "color": "#4682b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4682b4", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.059881688608774, "stroke": true, "weight": 3}
+            ).addTo(feature_group_6e6e14e690a5599bcd300283854b1cf4);
+        
+    
+            circle_marker_7849766ae7bf7ce9c88024d198cd42a6.bindTooltip(
+                `<div>
+                     
+    <h4>State: TO</h4>
+    <b>⭐ Opp Score: 0.001</b><br>
+    📦 Demand: 313<br>
+    😊 Avg Rating: 4.11
+    
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_d708d9c318c88680afc3086eaa36ce1a = L.marker(
+                [-9.750721030945575, -48.36419014293379],
+                {
+}
+            ).addTo(feature_group_6e6e14e690a5599bcd300283854b1cf4);
+        
+    
+            var div_icon_69d79e083b4a6c52c2859dabf4bb63c2 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 10pt; font-weight: bold; color: white; text-align: center; text-shadow: 1px 1px 2px black;\"\u003e0.001\u003c/div\u003e",
+  "iconSize": [100, 20],
+  "iconAnchor": [50, 0],
+  "className": "empty",
+});
+        
+    
+                marker_d708d9c318c88680afc3086eaa36ce1a.setIcon(div_icon_69d79e083b4a6c52c2859dabf4bb63c2);
+            
+    
+            feature_group_6e6e14e690a5599bcd300283854b1cf4.addTo(map_71389321908ee4b951625d2bc2e8278b);
+        
+    
+            var feature_group_90bffce2c1e2e6ace5626fd8a3039933 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_980b6081b50913a002b66ddd32edb375 = L.marker(
+                [-9.618440411162295, -36.03919702529452],
+                {
+}
+            ).addTo(feature_group_90bffce2c1e2e6ace5626fd8a3039933);
+        
+    
+            var icon_a73d0679ba37c1e56f780412eccf5007 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "exclamation-triangle",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_980b6081b50913a002b66ddd32edb375.bindTooltip(
+                `<div>
+                     <b>⚠️ Risk Alert (AL)</b><br>여유 기간: 7.8일
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_980b6081b50913a002b66ddd32edb375.setIcon(icon_a73d0679ba37c1e56f780412eccf5007);
+            
+    
+            var marker_bb8afe3e1f52386f003e1b2a7fab1fc0 = L.marker(
+                [-9.618440411162295, -36.03919702529452],
+                {
+}
+            ).addTo(feature_group_90bffce2c1e2e6ace5626fd8a3039933);
+        
+    
+            var div_icon_d1d1812e472befcd2a768ac4a5433496 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 9pt; font-weight: bold; color: #ffcccc; text-align: left; text-shadow: 1px 1px 1px black;\"\u003e7.8\uc77c\u003c/div\u003e",
+  "iconSize": [100, 20],
+  "iconAnchor": [0, -10],
+  "className": "empty",
+});
+        
+    
+                marker_bb8afe3e1f52386f003e1b2a7fab1fc0.setIcon(div_icon_d1d1812e472befcd2a768ac4a5433496);
+            
+    
+            var marker_35b09191b1459b286001acb02e2b59d4 = L.marker(
+                [-13.02536382591919, -39.46903492818187],
+                {
+}
+            ).addTo(feature_group_90bffce2c1e2e6ace5626fd8a3039933);
+        
+    
+            var icon_2191b33866cfb2634342981d5e8571ec = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "exclamation-triangle",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_35b09191b1459b286001acb02e2b59d4.bindTooltip(
+                `<div>
+                     <b>⚠️ Risk Alert (BA)</b><br>여유 기간: 10.1일
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_35b09191b1459b286001acb02e2b59d4.setIcon(icon_2191b33866cfb2634342981d5e8571ec);
+            
+    
+            var marker_326ad8a9e51219d071ea20de8b1d26ef = L.marker(
+                [-13.02536382591919, -39.46903492818187],
+                {
+}
+            ).addTo(feature_group_90bffce2c1e2e6ace5626fd8a3039933);
+        
+    
+            var div_icon_e0300a269902ab5ac7becb28800c2b0b = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 9pt; font-weight: bold; color: #ffcccc; text-align: left; text-shadow: 1px 1px 1px black;\"\u003e10.1\uc77c\u003c/div\u003e",
+  "iconSize": [100, 20],
+  "iconAnchor": [0, -10],
+  "className": "empty",
+});
+        
+    
+                marker_326ad8a9e51219d071ea20de8b1d26ef.setIcon(div_icon_e0300a269902ab5ac7becb28800c2b0b);
+            
+    
+            var marker_8280aa92f03ca808c976d1de7a207bf1 = L.marker(
+                [-4.328533932939406, -38.959713567837426],
+                {
+}
+            ).addTo(feature_group_90bffce2c1e2e6ace5626fd8a3039933);
+        
+    
+            var icon_ff841e402370bbe097bddff5a4d947d8 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "exclamation-triangle",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_8280aa92f03ca808c976d1de7a207bf1.bindTooltip(
+                `<div>
+                     <b>⚠️ Risk Alert (CE)</b><br>여유 기간: 10.1일
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_8280aa92f03ca808c976d1de7a207bf1.setIcon(icon_ff841e402370bbe097bddff5a4d947d8);
+            
+    
+            var marker_97ea79b8de3cdf612a99208c96cb6ad2 = L.marker(
+                [-4.328533932939406, -38.959713567837426],
+                {
+}
+            ).addTo(feature_group_90bffce2c1e2e6ace5626fd8a3039933);
+        
+    
+            var div_icon_759f902cac075a37b5549abe718fa98a = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 9pt; font-weight: bold; color: #ffcccc; text-align: left; text-shadow: 1px 1px 1px black;\"\u003e10.1\uc77c\u003c/div\u003e",
+  "iconSize": [100, 20],
+  "iconAnchor": [0, -10],
+  "className": "empty",
+});
+        
+    
+                marker_97ea79b8de3cdf612a99208c96cb6ad2.setIcon(div_icon_759f902cac075a37b5549abe718fa98a);
+            
+    
+            var marker_3d59b257804604a645b15665a5b8168c = L.marker(
+                [-15.810474939565314, -47.970559637658354],
+                {
+}
+            ).addTo(feature_group_90bffce2c1e2e6ace5626fd8a3039933);
+        
+    
+            var icon_df8b56440e147c3c8e7470abf208a6c2 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "exclamation-triangle",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_3d59b257804604a645b15665a5b8168c.bindTooltip(
+                `<div>
+                     <b>⚠️ Risk Alert (DF)</b><br>여유 기간: 11.2일
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_3d59b257804604a645b15665a5b8168c.setIcon(icon_df8b56440e147c3c8e7470abf208a6c2);
+            
+    
+            var marker_f6a54dae619c86cda6400cb3e6faae1c = L.marker(
+                [-15.810474939565314, -47.970559637658354],
+                {
+}
+            ).addTo(feature_group_90bffce2c1e2e6ace5626fd8a3039933);
+        
+    
+            var div_icon_ebbc0a716dff1bd48f746982f55c2235 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 9pt; font-weight: bold; color: #ffcccc; text-align: left; text-shadow: 1px 1px 1px black;\"\u003e11.2\uc77c\u003c/div\u003e",
+  "iconSize": [100, 20],
+  "iconAnchor": [0, -10],
+  "className": "empty",
+});
+        
+    
+                marker_f6a54dae619c86cda6400cb3e6faae1c.setIcon(div_icon_ebbc0a716dff1bd48f746982f55c2235);
+            
+    
+            var marker_ca68ec91448a243405fe3282ca641f0a = L.marker(
+                [-20.143974897208146, -40.491591293904825],
+                {
+}
+            ).addTo(feature_group_90bffce2c1e2e6ace5626fd8a3039933);
+        
+    
+            var icon_02e9a159a5577bfe4cc250cdd30d6a33 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "exclamation-triangle",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_ca68ec91448a243405fe3282ca641f0a.bindTooltip(
+                `<div>
+                     <b>⚠️ Risk Alert (ES)</b><br>여유 기간: 9.9일
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_ca68ec91448a243405fe3282ca641f0a.setIcon(icon_02e9a159a5577bfe4cc250cdd30d6a33);
+            
+    
+            var marker_4dc740104655c9709420fbd83ad2f952 = L.marker(
+                [-20.143974897208146, -40.491591293904825],
+                {
+}
+            ).addTo(feature_group_90bffce2c1e2e6ace5626fd8a3039933);
+        
+    
+            var div_icon_a1e90e4559865acb39a1d7948661c3eb = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 9pt; font-weight: bold; color: #ffcccc; text-align: left; text-shadow: 1px 1px 1px black;\"\u003e9.9\uc77c\u003c/div\u003e",
+  "iconSize": [100, 20],
+  "iconAnchor": [0, -10],
+  "className": "empty",
+});
+        
+    
+                marker_4dc740104655c9709420fbd83ad2f952.setIcon(div_icon_a1e90e4559865acb39a1d7948661c3eb);
+            
+    
+            var marker_30d36466227cc1e075fbbdb551a0588a = L.marker(
+                [-16.616165551852177, -49.32636957183859],
+                {
+}
+            ).addTo(feature_group_90bffce2c1e2e6ace5626fd8a3039933);
+        
+    
+            var icon_61d18535de57f5222e8465c4ec3bc31b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "exclamation-triangle",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_30d36466227cc1e075fbbdb551a0588a.bindTooltip(
+                `<div>
+                     <b>⚠️ Risk Alert (GO)</b><br>여유 기간: 11.3일
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_30d36466227cc1e075fbbdb551a0588a.setIcon(icon_61d18535de57f5222e8465c4ec3bc31b);
+            
+    
+            var marker_f27487b714ad8d11236c7c9c19388996 = L.marker(
+                [-16.616165551852177, -49.32636957183859],
+                {
+}
+            ).addTo(feature_group_90bffce2c1e2e6ace5626fd8a3039933);
+        
+    
+            var div_icon_45877032142e9e2d1b368ad648830d48 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 9pt; font-weight: bold; color: #ffcccc; text-align: left; text-shadow: 1px 1px 1px black;\"\u003e11.3\uc77c\u003c/div\u003e",
+  "iconSize": [100, 20],
+  "iconAnchor": [0, -10],
+  "className": "empty",
+});
+        
+    
+                marker_f27487b714ad8d11236c7c9c19388996.setIcon(div_icon_45877032142e9e2d1b368ad648830d48);
+            
+    
+            var marker_7d9ebd00dcea095650b4be7d18b80157 = L.marker(
+                [-3.5795040474073514, -44.691816568308205],
+                {
+}
+            ).addTo(feature_group_90bffce2c1e2e6ace5626fd8a3039933);
+        
+    
+            var icon_2429f5a06c4c1b8eccf60b7518c7211b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "exclamation-triangle",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_7d9ebd00dcea095650b4be7d18b80157.bindTooltip(
+                `<div>
+                     <b>⚠️ Risk Alert (MA)</b><br>여유 기간: 9.2일
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_7d9ebd00dcea095650b4be7d18b80157.setIcon(icon_2429f5a06c4c1b8eccf60b7518c7211b);
+            
+    
+            var marker_389d00be0cd6173f3691fa56d7b31229 = L.marker(
+                [-3.5795040474073514, -44.691816568308205],
+                {
+}
+            ).addTo(feature_group_90bffce2c1e2e6ace5626fd8a3039933);
+        
+    
+            var div_icon_2601a4ba4a2cec8c16d127a0d728649c = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 9pt; font-weight: bold; color: #ffcccc; text-align: left; text-shadow: 1px 1px 1px black;\"\u003e9.2\uc77c\u003c/div\u003e",
+  "iconSize": [100, 20],
+  "iconAnchor": [0, -10],
+  "className": "empty",
+});
+        
+    
+                marker_389d00be0cd6173f3691fa56d7b31229.setIcon(div_icon_2601a4ba4a2cec8c16d127a0d728649c);
+            
+    
+            var marker_794664ec53a60d5b598f9c74d4849f26 = L.marker(
+                [-20.74934508406467, -54.44409803876795],
+                {
+}
+            ).addTo(feature_group_90bffce2c1e2e6ace5626fd8a3039933);
+        
+    
+            var icon_d758567ab2c476d268ca962dbf4cfae8 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "exclamation-triangle",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_794664ec53a60d5b598f9c74d4849f26.bindTooltip(
+                `<div>
+                     <b>⚠️ Risk Alert (MS)</b><br>여유 기간: 10.2일
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_794664ec53a60d5b598f9c74d4849f26.setIcon(icon_d758567ab2c476d268ca962dbf4cfae8);
+            
+    
+            var marker_3f3e43e2bce793a6cc5f71450d7fdd19 = L.marker(
+                [-20.74934508406467, -54.44409803876795],
+                {
+}
+            ).addTo(feature_group_90bffce2c1e2e6ace5626fd8a3039933);
+        
+    
+            var div_icon_0f0e216f4d004eb56e8ab9b6a9ef31d5 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 9pt; font-weight: bold; color: #ffcccc; text-align: left; text-shadow: 1px 1px 1px black;\"\u003e10.2\uc77c\u003c/div\u003e",
+  "iconSize": [100, 20],
+  "iconAnchor": [0, -10],
+  "className": "empty",
+});
+        
+    
+                marker_3f3e43e2bce793a6cc5f71450d7fdd19.setIcon(div_icon_0f0e216f4d004eb56e8ab9b6a9ef31d5);
+            
+    
+            var marker_5f99e1d3bf451455509ec20c46bb6c6c = L.marker(
+                [-5.533798014503708, -42.59894315504948],
+                {
+}
+            ).addTo(feature_group_90bffce2c1e2e6ace5626fd8a3039933);
+        
+    
+            var icon_36a249c1eeda13038a142178a5e0441b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "exclamation-triangle",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_5f99e1d3bf451455509ec20c46bb6c6c.bindTooltip(
+                `<div>
+                     <b>⚠️ Risk Alert (PI)</b><br>여유 기간: 10.5일
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_5f99e1d3bf451455509ec20c46bb6c6c.setIcon(icon_36a249c1eeda13038a142178a5e0441b);
+            
+    
+            var marker_6ec81ee88e45daa06f75f26451af626d = L.marker(
+                [-5.533798014503708, -42.59894315504948],
+                {
+}
+            ).addTo(feature_group_90bffce2c1e2e6ace5626fd8a3039933);
+        
+    
+            var div_icon_5e354427dc244f252533adb61ad0760f = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 9pt; font-weight: bold; color: #ffcccc; text-align: left; text-shadow: 1px 1px 1px black;\"\u003e10.5\uc77c\u003c/div\u003e",
+  "iconSize": [100, 20],
+  "iconAnchor": [0, -10],
+  "className": "empty",
+});
+        
+    
+                marker_6ec81ee88e45daa06f75f26451af626d.setIcon(div_icon_5e354427dc244f252533adb61ad0760f);
+            
+    
+            var marker_87a1550048eeb7745e903c9733ee14e1 = L.marker(
+                [-22.756395174016212, -43.17504686937467],
+                {
+}
+            ).addTo(feature_group_90bffce2c1e2e6ace5626fd8a3039933);
+        
+    
+            var icon_aca18b2ad206cabb11710808d97221fb = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "exclamation-triangle",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_87a1550048eeb7745e903c9733ee14e1.bindTooltip(
+                `<div>
+                     <b>⚠️ Risk Alert (RJ)</b><br>여유 기간: 11.1일
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_87a1550048eeb7745e903c9733ee14e1.setIcon(icon_aca18b2ad206cabb11710808d97221fb);
+            
+    
+            var marker_e8b632d6a540b79871c08796ffc55016 = L.marker(
+                [-22.756395174016212, -43.17504686937467],
+                {
+}
+            ).addTo(feature_group_90bffce2c1e2e6ace5626fd8a3039933);
+        
+    
+            var div_icon_0901daa631bb89676d1535d2d55adf5b = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 9pt; font-weight: bold; color: #ffcccc; text-align: left; text-shadow: 1px 1px 1px black;\"\u003e11.1\uc77c\u003c/div\u003e",
+  "iconSize": [100, 20],
+  "iconAnchor": [0, -10],
+  "className": "empty",
+});
+        
+    
+                marker_e8b632d6a540b79871c08796ffc55016.setIcon(div_icon_0901daa631bb89676d1535d2d55adf5b);
+            
+    
+            var marker_87c4b100d1f8a34a882ea63d4cb88fbe = L.marker(
+                [-27.247531562634602, -49.57379005870357],
+                {
+}
+            ).addTo(feature_group_90bffce2c1e2e6ace5626fd8a3039933);
+        
+    
+            var icon_2567d00716a14c66e1ebd433296ce41e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "exclamation-triangle",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_87c4b100d1f8a34a882ea63d4cb88fbe.bindTooltip(
+                `<div>
+                     <b>⚠️ Risk Alert (SC)</b><br>여유 기간: 10.7일
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_87c4b100d1f8a34a882ea63d4cb88fbe.setIcon(icon_2567d00716a14c66e1ebd433296ce41e);
+            
+    
+            var marker_ab6fa78dc366d9a5fd0b133b7f669464 = L.marker(
+                [-27.247531562634602, -49.57379005870357],
+                {
+}
+            ).addTo(feature_group_90bffce2c1e2e6ace5626fd8a3039933);
+        
+    
+            var div_icon_50aa2feeef22a6ea9d9a5aa4ff55e569 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 9pt; font-weight: bold; color: #ffcccc; text-align: left; text-shadow: 1px 1px 1px black;\"\u003e10.7\uc77c\u003c/div\u003e",
+  "iconSize": [100, 20],
+  "iconAnchor": [0, -10],
+  "className": "empty",
+});
+        
+    
+                marker_ab6fa78dc366d9a5fd0b133b7f669464.setIcon(div_icon_50aa2feeef22a6ea9d9a5aa4ff55e569);
+            
+    
+            var marker_d87e7d005b554de026558a4aabf9d413 = L.marker(
+                [-10.869456899261065, -37.1716593041677],
+                {
+}
+            ).addTo(feature_group_90bffce2c1e2e6ace5626fd8a3039933);
+        
+    
+            var icon_60b42355f16a134924e56c04e594d2e6 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "exclamation-triangle",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_d87e7d005b554de026558a4aabf9d413.bindTooltip(
+                `<div>
+                     <b>⚠️ Risk Alert (SE)</b><br>여유 기간: 9.1일
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_d87e7d005b554de026558a4aabf9d413.setIcon(icon_60b42355f16a134924e56c04e594d2e6);
+            
+    
+            var marker_da8cb25633043cffa228c08929b28a33 = L.marker(
+                [-10.869456899261065, -37.1716593041677],
+                {
+}
+            ).addTo(feature_group_90bffce2c1e2e6ace5626fd8a3039933);
+        
+    
+            var div_icon_5b0d5d81b649b7ec1949e033a9b922ad = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 9pt; font-weight: bold; color: #ffcccc; text-align: left; text-shadow: 1px 1px 1px black;\"\u003e9.1\uc77c\u003c/div\u003e",
+  "iconSize": [100, 20],
+  "iconAnchor": [0, -10],
+  "className": "empty",
+});
+        
+    
+                marker_da8cb25633043cffa228c08929b28a33.setIcon(div_icon_5b0d5d81b649b7ec1949e033a9b922ad);
+            
+    
+            var marker_18cde54dfa46113b0b4cb38dad13a5d2 = L.marker(
+                [-23.16639945041646, -47.04705120191024],
+                {
+}
+            ).addTo(feature_group_90bffce2c1e2e6ace5626fd8a3039933);
+        
+    
+            var icon_1d72f630437e6167676e8357fd871ee8 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "exclamation-triangle",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_18cde54dfa46113b0b4cb38dad13a5d2.bindTooltip(
+                `<div>
+                     <b>⚠️ Risk Alert (SP)</b><br>여유 기간: 10.2일
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_18cde54dfa46113b0b4cb38dad13a5d2.setIcon(icon_1d72f630437e6167676e8357fd871ee8);
+            
+    
+            var marker_94350f8bda41378e37bbd9d404f78a18 = L.marker(
+                [-23.16639945041646, -47.04705120191024],
+                {
+}
+            ).addTo(feature_group_90bffce2c1e2e6ace5626fd8a3039933);
+        
+    
+            var div_icon_39815c0e5a65dcd5205921a497eab0ee = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 9pt; font-weight: bold; color: #ffcccc; text-align: left; text-shadow: 1px 1px 1px black;\"\u003e10.2\uc77c\u003c/div\u003e",
+  "iconSize": [100, 20],
+  "iconAnchor": [0, -10],
+  "className": "empty",
+});
+        
+    
+                marker_94350f8bda41378e37bbd9d404f78a18.setIcon(div_icon_39815c0e5a65dcd5205921a497eab0ee);
+            
+    
+            var marker_0f0c2be3996198194ebf9d1f7aac7617 = L.marker(
+                [-9.750721030945575, -48.36419014293379],
+                {
+}
+            ).addTo(feature_group_90bffce2c1e2e6ace5626fd8a3039933);
+        
+    
+            var icon_be7d27ecbf933d8b40075aaaf23bbeea = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "exclamation-triangle",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_0f0c2be3996198194ebf9d1f7aac7617.bindTooltip(
+                `<div>
+                     <b>⚠️ Risk Alert (TO)</b><br>여유 기간: 11.3일
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_0f0c2be3996198194ebf9d1f7aac7617.setIcon(icon_be7d27ecbf933d8b40075aaaf23bbeea);
+            
+    
+            var marker_28c7ed08e4e3307c0249759e1a9b9f21 = L.marker(
+                [-9.750721030945575, -48.36419014293379],
+                {
+}
+            ).addTo(feature_group_90bffce2c1e2e6ace5626fd8a3039933);
+        
+    
+            var div_icon_926b98602368c63f7ca686ac98a6803d = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 9pt; font-weight: bold; color: #ffcccc; text-align: left; text-shadow: 1px 1px 1px black;\"\u003e11.3\uc77c\u003c/div\u003e",
+  "iconSize": [100, 20],
+  "iconAnchor": [0, -10],
+  "className": "empty",
+});
+        
+    
+                marker_28c7ed08e4e3307c0249759e1a9b9f21.setIcon(div_icon_926b98602368c63f7ca686ac98a6803d);
+            
+    
+            var feature_group_4cde87f25d2ab7ef4aaf1212f39519cf = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_8d5e25c2a74a3bae5ad4239439975c2a = L.marker(
+                [-9.440727717367688, -67.54851602006708],
+                {
+}
+            ).addTo(feature_group_4cde87f25d2ab7ef4aaf1212f39519cf);
+        
+    
+            var icon_d6f873a700c47e3755c16e9b117ab7f6 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "money",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_8d5e25c2a74a3bae5ad4239439975c2a.bindTooltip(
+                `<div>
+                     <b>💰 Cost Alert (AC)</b><br>배송비 비율: 0.51
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_8d5e25c2a74a3bae5ad4239439975c2a.setIcon(icon_d6f873a700c47e3755c16e9b117ab7f6);
+            
+    
+            var marker_0b2240825bc3bd942aa7380fcfc91397 = L.marker(
+                [-9.440727717367688, -67.54851602006708],
+                {
+}
+            ).addTo(feature_group_4cde87f25d2ab7ef4aaf1212f39519cf);
+        
+    
+            var div_icon_5e66ec03da7433f4094f4bb3c3008869 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 9pt; font-weight: bold; color: #90ee90; text-align: left; text-shadow: 1px 1px 1px black;\"\u003e0.51\u003c/div\u003e",
+  "iconSize": [100, 20],
+  "iconAnchor": [0, -10],
+  "className": "empty",
+});
+        
+    
+                marker_0b2240825bc3bd942aa7380fcfc91397.setIcon(div_icon_5e66ec03da7433f4094f4bb3c3008869);
+            
+    
+            var marker_15f4128b360f105e05e898f97032bdad = L.marker(
+                [-9.118440411162295, -35.53919702529452],
+                {
+}
+            ).addTo(feature_group_4cde87f25d2ab7ef4aaf1212f39519cf);
+        
+    
+            var icon_cb92266f3e605ee5f1efa64199e9fa19 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "money",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_15f4128b360f105e05e898f97032bdad.bindTooltip(
+                `<div>
+                     <b>💰 Cost Alert (AL)</b><br>배송비 비율: 0.48
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_15f4128b360f105e05e898f97032bdad.setIcon(icon_cb92266f3e605ee5f1efa64199e9fa19);
+            
+    
+            var marker_5afca793c5703bbf06d0d7ae5dedcbad = L.marker(
+                [-9.118440411162295, -35.53919702529452],
+                {
+}
+            ).addTo(feature_group_4cde87f25d2ab7ef4aaf1212f39519cf);
+        
+    
+            var div_icon_f067c39bfb9e3e5f6ed6bb319e15285b = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 9pt; font-weight: bold; color: #90ee90; text-align: left; text-shadow: 1px 1px 1px black;\"\u003e0.48\u003c/div\u003e",
+  "iconSize": [100, 20],
+  "iconAnchor": [0, -10],
+  "className": "empty",
+});
+        
+    
+                marker_5afca793c5703bbf06d0d7ae5dedcbad.setIcon(div_icon_f067c39bfb9e3e5f6ed6bb319e15285b);
+            
+    
+            var marker_6b37fd82dd6586b4a303ed2579a87dd7 = L.marker(
+                [-2.701189646612719, -59.56063565408504],
+                {
+}
+            ).addTo(feature_group_4cde87f25d2ab7ef4aaf1212f39519cf);
+        
+    
+            var icon_d59f83d7fcc13bbafe6e4309792be114 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "money",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_6b37fd82dd6586b4a303ed2579a87dd7.bindTooltip(
+                `<div>
+                     <b>💰 Cost Alert (AM)</b><br>배송비 비율: 0.50
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_6b37fd82dd6586b4a303ed2579a87dd7.setIcon(icon_d59f83d7fcc13bbafe6e4309792be114);
+            
+    
+            var marker_c451bea027a4b71596006246443b6cd9 = L.marker(
+                [-2.701189646612719, -59.56063565408504],
+                {
+}
+            ).addTo(feature_group_4cde87f25d2ab7ef4aaf1212f39519cf);
+        
+    
+            var div_icon_ad07aaadaf5fda53f66c24efcc40bd26 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 9pt; font-weight: bold; color: #90ee90; text-align: left; text-shadow: 1px 1px 1px black;\"\u003e0.50\u003c/div\u003e",
+  "iconSize": [100, 20],
+  "iconAnchor": [0, -10],
+  "className": "empty",
+});
+        
+    
+                marker_c451bea027a4b71596006246443b6cd9.setIcon(div_icon_ad07aaadaf5fda53f66c24efcc40bd26);
+            
+    
+            var marker_13a75b2b04e4839b099703d09131c692 = L.marker(
+                [-3.828533932939406, -38.459713567837426],
+                {
+}
+            ).addTo(feature_group_4cde87f25d2ab7ef4aaf1212f39519cf);
+        
+    
+            var icon_d2f3b7be6cb73b8e04e1231b8dfed669 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "money",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_13a75b2b04e4839b099703d09131c692.bindTooltip(
+                `<div>
+                     <b>💰 Cost Alert (CE)</b><br>배송비 비율: 0.43
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_13a75b2b04e4839b099703d09131c692.setIcon(icon_d2f3b7be6cb73b8e04e1231b8dfed669);
+            
+    
+            var marker_5c92d7ff04d0d705dfff0fe89f38652f = L.marker(
+                [-3.828533932939406, -38.459713567837426],
+                {
+}
+            ).addTo(feature_group_4cde87f25d2ab7ef4aaf1212f39519cf);
+        
+    
+            var div_icon_f8e2f1b52f2ab320ce6a7a7ad603da17 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 9pt; font-weight: bold; color: #90ee90; text-align: left; text-shadow: 1px 1px 1px black;\"\u003e0.43\u003c/div\u003e",
+  "iconSize": [100, 20],
+  "iconAnchor": [0, -10],
+  "className": "empty",
+});
+        
+    
+                marker_5c92d7ff04d0d705dfff0fe89f38652f.setIcon(div_icon_f8e2f1b52f2ab320ce6a7a7ad603da17);
+            
+    
+            var marker_984d5df3fb9287cd34ab34fdeffc9456 = L.marker(
+                [-3.0795040474073514, -44.191816568308205],
+                {
+}
+            ).addTo(feature_group_4cde87f25d2ab7ef4aaf1212f39519cf);
+        
+    
+            var icon_bf14ffb4ba5c3fb25b664b1ce42ee222 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "money",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_984d5df3fb9287cd34ab34fdeffc9456.bindTooltip(
+                `<div>
+                     <b>💰 Cost Alert (MA)</b><br>배송비 비율: 0.55
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_984d5df3fb9287cd34ab34fdeffc9456.setIcon(icon_bf14ffb4ba5c3fb25b664b1ce42ee222);
+            
+    
+            var marker_698fbec0e5c7d451b5dd0afec2aca6d0 = L.marker(
+                [-3.0795040474073514, -44.191816568308205],
+                {
+}
+            ).addTo(feature_group_4cde87f25d2ab7ef4aaf1212f39519cf);
+        
+    
+            var div_icon_9a2443761fa402384390253c8a61f4a8 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 9pt; font-weight: bold; color: #90ee90; text-align: left; text-shadow: 1px 1px 1px black;\"\u003e0.55\u003c/div\u003e",
+  "iconSize": [100, 20],
+  "iconAnchor": [0, -10],
+  "className": "empty",
+});
+        
+    
+                marker_698fbec0e5c7d451b5dd0afec2aca6d0.setIcon(div_icon_9a2443761fa402384390253c8a61f4a8);
+            
+    
+            var marker_55903974d25d446ef5d28015252f1f5f = L.marker(
+                [-1.9085513836712416, -48.5834843221631],
+                {
+}
+            ).addTo(feature_group_4cde87f25d2ab7ef4aaf1212f39519cf);
+        
+    
+            var icon_bf47c11529612d6b883ce3e56c4d5c8d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "money",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_55903974d25d446ef5d28015252f1f5f.bindTooltip(
+                `<div>
+                     <b>💰 Cost Alert (PA)</b><br>배송비 비율: 0.48
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_55903974d25d446ef5d28015252f1f5f.setIcon(icon_bf47c11529612d6b883ce3e56c4d5c8d);
+            
+    
+            var marker_cee6ee68e8d780203da27570968eb626 = L.marker(
+                [-1.9085513836712416, -48.5834843221631],
+                {
+}
+            ).addTo(feature_group_4cde87f25d2ab7ef4aaf1212f39519cf);
+        
+    
+            var div_icon_5b39dfe49f36b0fa21aaf37538558ca6 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 9pt; font-weight: bold; color: #90ee90; text-align: left; text-shadow: 1px 1px 1px black;\"\u003e0.48\u003c/div\u003e",
+  "iconSize": [100, 20],
+  "iconAnchor": [0, -10],
+  "className": "empty",
+});
+        
+    
+                marker_cee6ee68e8d780203da27570968eb626.setIcon(div_icon_5b39dfe49f36b0fa21aaf37538558ca6);
+            
+    
+            var marker_5a64d75e78b16829c13cda5f1c7b735b = L.marker(
+                [-6.587990320489705, -35.11652648790981],
+                {
+}
+            ).addTo(feature_group_4cde87f25d2ab7ef4aaf1212f39519cf);
+        
+    
+            var icon_efa1ab54c75853a049248153086b9360 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "money",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_5a64d75e78b16829c13cda5f1c7b735b.bindTooltip(
+                `<div>
+                     <b>💰 Cost Alert (PB)</b><br>배송비 비율: 0.51
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_5a64d75e78b16829c13cda5f1c7b735b.setIcon(icon_efa1ab54c75853a049248153086b9360);
+            
+    
+            var marker_a13b6258cf4faad2a6d80f93806f2273 = L.marker(
+                [-6.587990320489705, -35.11652648790981],
+                {
+}
+            ).addTo(feature_group_4cde87f25d2ab7ef4aaf1212f39519cf);
+        
+    
+            var div_icon_4578947a4c66e135e43bdae7ae74cc18 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 9pt; font-weight: bold; color: #90ee90; text-align: left; text-shadow: 1px 1px 1px black;\"\u003e0.51\u003c/div\u003e",
+  "iconSize": [100, 20],
+  "iconAnchor": [0, -10],
+  "className": "empty",
+});
+        
+    
+                marker_a13b6258cf4faad2a6d80f93806f2273.setIcon(div_icon_4578947a4c66e135e43bdae7ae74cc18);
+            
+    
+            var marker_5d2733cecc68f7bf8d51b9c7cf207a4e = L.marker(
+                [-7.6947372659734, -35.266598366817455],
+                {
+}
+            ).addTo(feature_group_4cde87f25d2ab7ef4aaf1212f39519cf);
+        
+    
+            var icon_a026495b76f60382e54e2afe2bb9299f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "money",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_5d2733cecc68f7bf8d51b9c7cf207a4e.bindTooltip(
+                `<div>
+                     <b>💰 Cost Alert (PE)</b><br>배송비 비율: 0.45
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_5d2733cecc68f7bf8d51b9c7cf207a4e.setIcon(icon_a026495b76f60382e54e2afe2bb9299f);
+            
+    
+            var marker_fc9be7cf0ad9976befc9ade63f5980ff = L.marker(
+                [-7.6947372659734, -35.266598366817455],
+                {
+}
+            ).addTo(feature_group_4cde87f25d2ab7ef4aaf1212f39519cf);
+        
+    
+            var div_icon_f5fe3a3e3393a09da3930cfec8efd2cf = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 9pt; font-weight: bold; color: #90ee90; text-align: left; text-shadow: 1px 1px 1px black;\"\u003e0.45\u003c/div\u003e",
+  "iconSize": [100, 20],
+  "iconAnchor": [0, -10],
+  "className": "empty",
+});
+        
+    
+                marker_fc9be7cf0ad9976befc9ade63f5980ff.setIcon(div_icon_f5fe3a3e3393a09da3930cfec8efd2cf);
+            
+    
+            var marker_991039c66702fc9b8d21a72e19618d5c = L.marker(
+                [-5.033798014503708, -42.09894315504948],
+                {
+}
+            ).addTo(feature_group_4cde87f25d2ab7ef4aaf1212f39519cf);
+        
+    
+            var icon_b0fce13f065031e6265bc03b8cec9b60 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "money",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_991039c66702fc9b8d21a72e19618d5c.bindTooltip(
+                `<div>
+                     <b>💰 Cost Alert (PI)</b><br>배송비 비율: 0.50
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_991039c66702fc9b8d21a72e19618d5c.setIcon(icon_b0fce13f065031e6265bc03b8cec9b60);
+            
+    
+            var marker_3e9778362a10ef62f5005988e9d8906b = L.marker(
+                [-5.033798014503708, -42.09894315504948],
+                {
+}
+            ).addTo(feature_group_4cde87f25d2ab7ef4aaf1212f39519cf);
+        
+    
+            var div_icon_aaf6bb8045b91a99317d35d79530b67a = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 9pt; font-weight: bold; color: #90ee90; text-align: left; text-shadow: 1px 1px 1px black;\"\u003e0.50\u003c/div\u003e",
+  "iconSize": [100, 20],
+  "iconAnchor": [0, -10],
+  "className": "empty",
+});
+        
+    
+                marker_3e9778362a10ef62f5005988e9d8906b.setIcon(div_icon_aaf6bb8045b91a99317d35d79530b67a);
+            
+    
+            var marker_eefefa9050d779f204b36def90bdacd4 = L.marker(
+                [-5.336066164151715, -35.425705800107956],
+                {
+}
+            ).addTo(feature_group_4cde87f25d2ab7ef4aaf1212f39519cf);
+        
+    
+            var icon_aa0db8b0e8b66979c4dd60a0855c9e15 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "money",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_eefefa9050d779f204b36def90bdacd4.bindTooltip(
+                `<div>
+                     <b>💰 Cost Alert (RN)</b><br>배송비 비율: 0.51
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_eefefa9050d779f204b36def90bdacd4.setIcon(icon_aa0db8b0e8b66979c4dd60a0855c9e15);
+            
+    
+            var marker_259283f82b349ccf5d93d8282deb99c8 = L.marker(
+                [-5.336066164151715, -35.425705800107956],
+                {
+}
+            ).addTo(feature_group_4cde87f25d2ab7ef4aaf1212f39519cf);
+        
+    
+            var div_icon_c7774e6682a2c2eda69e2c74e9b33120 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 9pt; font-weight: bold; color: #90ee90; text-align: left; text-shadow: 1px 1px 1px black;\"\u003e0.51\u003c/div\u003e",
+  "iconSize": [100, 20],
+  "iconAnchor": [0, -10],
+  "className": "empty",
+});
+        
+    
+                marker_259283f82b349ccf5d93d8282deb99c8.setIcon(div_icon_c7774e6682a2c2eda69e2c74e9b33120);
+            
+    
+            var marker_d8a3a521613a5a510aa358967d74f491 = L.marker(
+                [-9.63601057111875, -62.33637548425774],
+                {
+}
+            ).addTo(feature_group_4cde87f25d2ab7ef4aaf1212f39519cf);
+        
+    
+            var icon_cd38225017be80308a2411dbd7df7076 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "money",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_d8a3a521613a5a510aa358967d74f491.bindTooltip(
+                `<div>
+                     <b>💰 Cost Alert (RO)</b><br>배송비 비율: 0.60
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_d8a3a521613a5a510aa358967d74f491.setIcon(icon_cd38225017be80308a2411dbd7df7076);
+            
+    
+            var marker_2bd4eef86689a71c8f01c0d7e4bf6712 = L.marker(
+                [-9.63601057111875, -62.33637548425774],
+                {
+}
+            ).addTo(feature_group_4cde87f25d2ab7ef4aaf1212f39519cf);
+        
+    
+            var div_icon_1612fbebdd4dea5d526218b87f9ea078 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 9pt; font-weight: bold; color: #90ee90; text-align: left; text-shadow: 1px 1px 1px black;\"\u003e0.60\u003c/div\u003e",
+  "iconSize": [100, 20],
+  "iconAnchor": [0, -10],
+  "className": "empty",
+});
+        
+    
+                marker_2bd4eef86689a71c8f01c0d7e4bf6712.setIcon(div_icon_1612fbebdd4dea5d526218b87f9ea078);
+            
+    
+            var marker_b4b961763b8124c00322996045bef9ab = L.marker(
+                [3.334404095619739, -60.17707258876818],
+                {
+}
+            ).addTo(feature_group_4cde87f25d2ab7ef4aaf1212f39519cf);
+        
+    
+            var icon_1db01127cd82fa1c1c6103e6f0671655 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "money",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_b4b961763b8124c00322996045bef9ab.bindTooltip(
+                `<div>
+                     <b>💰 Cost Alert (RR)</b><br>배송비 비율: 0.59
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_b4b961763b8124c00322996045bef9ab.setIcon(icon_1db01127cd82fa1c1c6103e6f0671655);
+            
+    
+            var marker_dc3043251b2d246a7cd226de5bd1a4d5 = L.marker(
+                [3.334404095619739, -60.17707258876818],
+                {
+}
+            ).addTo(feature_group_4cde87f25d2ab7ef4aaf1212f39519cf);
+        
+    
+            var div_icon_ac1c27319449965fb0c650926c8d879b = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 9pt; font-weight: bold; color: #90ee90; text-align: left; text-shadow: 1px 1px 1px black;\"\u003e0.59\u003c/div\u003e",
+  "iconSize": [100, 20],
+  "iconAnchor": [0, -10],
+  "className": "empty",
+});
+        
+    
+                marker_dc3043251b2d246a7cd226de5bd1a4d5.setIcon(div_icon_ac1c27319449965fb0c650926c8d879b);
+            
+    
+            var marker_e86469e97648e75eb4a83bb2ebb6defd = L.marker(
+                [-10.369456899261065, -36.6716593041677],
+                {
+}
+            ).addTo(feature_group_4cde87f25d2ab7ef4aaf1212f39519cf);
+        
+    
+            var icon_3227ad537c1fcc6b5eda798fdd8e2eb7 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "money",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_e86469e97648e75eb4a83bb2ebb6defd.bindTooltip(
+                `<div>
+                     <b>💰 Cost Alert (SE)</b><br>배송비 비율: 0.47
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_e86469e97648e75eb4a83bb2ebb6defd.setIcon(icon_3227ad537c1fcc6b5eda798fdd8e2eb7);
+            
+    
+            var marker_f6181dc07c9e2f6f691d7e295e5a6f51 = L.marker(
+                [-10.369456899261065, -36.6716593041677],
+                {
+}
+            ).addTo(feature_group_4cde87f25d2ab7ef4aaf1212f39519cf);
+        
+    
+            var div_icon_877630c5f93ced8b8d97bf0f946b4e2a = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 9pt; font-weight: bold; color: #90ee90; text-align: left; text-shadow: 1px 1px 1px black;\"\u003e0.47\u003c/div\u003e",
+  "iconSize": [100, 20],
+  "iconAnchor": [0, -10],
+  "className": "empty",
+});
+        
+    
+                marker_f6181dc07c9e2f6f691d7e295e5a6f51.setIcon(div_icon_877630c5f93ced8b8d97bf0f946b4e2a);
+            
+    
+            var marker_e08bf707b89883dd29f9385b521535ea = L.marker(
+                [-9.250721030945575, -47.86419014293379],
+                {
+}
+            ).addTo(feature_group_4cde87f25d2ab7ef4aaf1212f39519cf);
+        
+    
+            var icon_4b73df66e1e915438e4b3356ec8a16fb = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "money",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_e08bf707b89883dd29f9385b521535ea.bindTooltip(
+                `<div>
+                     <b>💰 Cost Alert (TO)</b><br>배송비 비율: 0.50
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_e08bf707b89883dd29f9385b521535ea.setIcon(icon_4b73df66e1e915438e4b3356ec8a16fb);
+            
+    
+            var marker_7cae7d017b7d7ea2132c9310cdb1f234 = L.marker(
+                [-9.250721030945575, -47.86419014293379],
+                {
+}
+            ).addTo(feature_group_4cde87f25d2ab7ef4aaf1212f39519cf);
+        
+    
+            var div_icon_cfca580c22ffdf06dc2dddb59396d304 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 9pt; font-weight: bold; color: #90ee90; text-align: left; text-shadow: 1px 1px 1px black;\"\u003e0.50\u003c/div\u003e",
+  "iconSize": [100, 20],
+  "iconAnchor": [0, -10],
+  "className": "empty",
+});
+        
+    
+                marker_7cae7d017b7d7ea2132c9310cdb1f234.setIcon(div_icon_cfca580c22ffdf06dc2dddb59396d304);
+            
+    
+            var layer_control_2781aae4f71ac098d637b09c12933783_layers = {
+                base_layers : {
+                    "cartodbdarkmatter" : tile_layer_bd6ab4d5f7b4f45e67de75d3093fcbd1,
+                },
+                overlays :  {
+                    "1. \uae30\ud68c \uc810\uc218 (Opportunity)" : feature_group_6e6e14e690a5599bcd300283854b1cf4,
+                    "2. \ubc30\uc1a1 \uc704\ud5d8 (Reliability)" : feature_group_90bffce2c1e2e6ace5626fd8a3039933,
+                    "3. \uace0\ube44\uc6a9 \uc9c0\uc5ed (Bundling)" : feature_group_4cde87f25d2ab7ef4aaf1212f39519cf,
+                },
+            };
+            let layer_control_2781aae4f71ac098d637b09c12933783 = L.control.layers(
+                layer_control_2781aae4f71ac098d637b09c12933783_layers.base_layers,
+                layer_control_2781aae4f71ac098d637b09c12933783_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": false,
+  "autoZIndex": true,
+}
+            ).addTo(map_71389321908ee4b951625d2bc2e8278b);
+
+        
+</script>
+</html>

@@ -1,0 +1,1592 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_7c58647bc8757abbad4ffe77c8e02622 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+     <div style="position: fixed; bottom: 30px; left: 30px; width: 250px; height: 170px; 
+     border:2px solid grey; z-index:9999; font-size:13px;
+     background-color:rgba(255,255,255,0.9); padding: 10px; border-radius:10px;">
+     <b>📊 Strategic Dashboard Guide</b><br><br>
+     <i style="background:#ffd700; width:12px; height:12px; display:inline-block; border-radius:50%"></i> <b>기회 점수 (Main)</b><br>
+     &nbsp;&nbsp;RJ(리우) 등 고수요/저만족 지역<br><br>
+     <i class="fa fa-exclamation-triangle" style="color:red"></i> <b>배송 위험 (Risk)</b><br>
+     &nbsp;&nbsp;AL, SE 등 여유기간 부족 지역<br><br>
+     <i class="fa fa-money" style="color:green"></i> <b>고비용 (Cost)</b><br>
+     &nbsp;&nbsp;RR, RO 등 배송비 과다 지역
+     </div>
+     
+    
+            <div class="folium-map" id="map_7c58647bc8757abbad4ffe77c8e02622" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_7c58647bc8757abbad4ffe77c8e02622 = L.map(
+                "map_7c58647bc8757abbad4ffe77c8e02622",
+                {
+                    center: [-14.235, -51.9253],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 4,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_0bbb78f145e5b76fd2436911eef70948 = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_0bbb78f145e5b76fd2436911eef70948.addTo(map_7c58647bc8757abbad4ffe77c8e02622);
+        
+    
+            var feature_group_ed118fd0d9f9b55bccee5e236175d05e = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var circle_marker_66f650b70da289fa2720ad9ca78ac0bb = L.circleMarker(
+                [-9.940727717367688, -68.04851602006708],
+                {"bubblingMouseEvents": true, "color": "#4682b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4682b4", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.009774878310887, "stroke": true, "weight": 3}
+            ).addTo(feature_group_ed118fd0d9f9b55bccee5e236175d05e);
+        
+    
+            circle_marker_66f650b70da289fa2720ad9ca78ac0bb.bindTooltip(
+                `<div>
+                     
+    <h4>State: AC</h4>
+    <b>⭐ Opp Score: 0.000</b><br>
+    📦 Demand: 92<br>
+    😊 Avg Rating: 4.10
+    
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_eb9031ae57319f6f2a7d5a9b94b00935 = L.circleMarker(
+                [-9.618440411162295, -36.03919702529452],
+                {"bubblingMouseEvents": true, "color": "#4682b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4682b4", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.391394745671048, "stroke": true, "weight": 3}
+            ).addTo(feature_group_ed118fd0d9f9b55bccee5e236175d05e);
+        
+    
+            circle_marker_eb9031ae57319f6f2a7d5a9b94b00935.bindTooltip(
+                `<div>
+                     
+    <h4>State: AL</h4>
+    <b>⭐ Opp Score: 0.007</b><br>
+    📦 Demand: 444<br>
+    😊 Avg Rating: 3.71
+    
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e550fc2efe7c47d492cf95ce03fc0e1a = L.circleMarker(
+                [-3.201189646612719, -60.06063565408504],
+                {"bubblingMouseEvents": true, "color": "#4682b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4682b4", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.032794334811422, "stroke": true, "weight": 3}
+            ).addTo(feature_group_ed118fd0d9f9b55bccee5e236175d05e);
+        
+    
+            circle_marker_e550fc2efe7c47d492cf95ce03fc0e1a.bindTooltip(
+                `<div>
+                     
+    <h4>State: AM</h4>
+    <b>⭐ Opp Score: 0.001</b><br>
+    📦 Demand: 164<br>
+    😊 Avg Rating: 4.07
+    
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_319d664a1ea56c57b7e5fe93ece0a9ae = L.circleMarker(
+                [0.04990799643618848, -51.17225273916242],
+                {"bubblingMouseEvents": true, "color": "#4682b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4682b4", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.0, "stroke": true, "weight": 3}
+            ).addTo(feature_group_ed118fd0d9f9b55bccee5e236175d05e);
+        
+    
+            circle_marker_319d664a1ea56c57b7e5fe93ece0a9ae.bindTooltip(
+                `<div>
+                     
+    <h4>State: AP</h4>
+    <b>⭐ Opp Score: 0.000</b><br>
+    📦 Demand: 81<br>
+    😊 Avg Rating: 4.22
+    
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_707004dd2e5db2f3a590af68fd5e2377 = L.circleMarker(
+                [-13.02536382591919, -39.46903492818187],
+                {"bubblingMouseEvents": true, "color": "#4682b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4682b4", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12.964429531065404, "stroke": true, "weight": 3}
+            ).addTo(feature_group_ed118fd0d9f9b55bccee5e236175d05e);
+        
+    
+            circle_marker_707004dd2e5db2f3a590af68fd5e2377.bindTooltip(
+                `<div>
+                     
+    <h4>State: BA</h4>
+    <b>⭐ Opp Score: 0.049</b><br>
+    📦 Demand: 3754<br>
+    😊 Avg Rating: 3.81
+    
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_48193040f50c45c1720a36ffa3ced2c8 = L.circleMarker(
+                [-4.328533932939406, -38.959713567837426],
+                {"bubblingMouseEvents": true, "color": "#4682b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4682b4", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 11.136546053587605, "stroke": true, "weight": 3}
+            ).addTo(feature_group_ed118fd0d9f9b55bccee5e236175d05e);
+        
+    
+            circle_marker_48193040f50c45c1720a36ffa3ced2c8.bindTooltip(
+                `<div>
+                     
+    <h4>State: CE</h4>
+    <b>⭐ Opp Score: 0.019</b><br>
+    📦 Demand: 1462<br>
+    😊 Avg Rating: 3.81
+    
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_3f7e2bd329c60fc233aa93821a4f65af = L.circleMarker(
+                [-15.810474939565314, -47.970559637658354],
+                {"bubblingMouseEvents": true, "color": "#4682b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4682b4", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.932224456797492, "stroke": true, "weight": 3}
+            ).addTo(feature_group_ed118fd0d9f9b55bccee5e236175d05e);
+        
+    
+            circle_marker_3f7e2bd329c60fc233aa93821a4f65af.bindTooltip(
+                `<div>
+                     
+    <h4>State: DF</h4>
+    <b>⭐ Opp Score: 0.016</b><br>
+    📦 Demand: 2227<br>
+    😊 Avg Rating: 4.00
+    
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_fcf81b9fc1c30e03400c31ae7d15e5ce = L.circleMarker(
+                [-20.143974897208146, -40.491591293904825],
+                {"bubblingMouseEvents": true, "color": "#4682b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4682b4", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.993448932556344, "stroke": true, "weight": 3}
+            ).addTo(feature_group_ed118fd0d9f9b55bccee5e236175d05e);
+        
+    
+            circle_marker_fcf81b9fc1c30e03400c31ae7d15e5ce.bindTooltip(
+                `<div>
+                     
+    <h4>State: ES</h4>
+    <b>⭐ Opp Score: 0.017</b><br>
+    📦 Demand: 2231<br>
+    😊 Avg Rating: 3.99
+    
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ea6fde2ab1fa46aedbeca495a9eace67 = L.circleMarker(
+                [-16.616165551852177, -49.32636957183859],
+                {"bubblingMouseEvents": true, "color": "#4682b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4682b4", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 11.017058829460861, "stroke": true, "weight": 3}
+            ).addTo(feature_group_ed118fd0d9f9b55bccee5e236175d05e);
+        
+    
+            circle_marker_ea6fde2ab1fa46aedbeca495a9eace67.bindTooltip(
+                `<div>
+                     
+    <h4>State: GO</h4>
+    <b>⭐ Opp Score: 0.017</b><br>
+    📦 Demand: 2307<br>
+    😊 Avg Rating: 3.99
+    
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_fe3c17bf61cea22c91c00fb468c34b5a = L.circleMarker(
+                [-3.5795040474073514, -44.691816568308205],
+                {"bubblingMouseEvents": true, "color": "#4682b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4682b4", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.752452778912623, "stroke": true, "weight": 3}
+            ).addTo(feature_group_ed118fd0d9f9b55bccee5e236175d05e);
+        
+    
+            circle_marker_fe3c17bf61cea22c91c00fb468c34b5a.bindTooltip(
+                `<div>
+                     
+    <h4>State: MA</h4>
+    <b>⭐ Opp Score: 0.013</b><br>
+    📦 Demand: 819<br>
+    😊 Avg Rating: 3.72
+    
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_6e217f5515d5c57cb0894554aa99e5cb = L.circleMarker(
+                [-19.916426309955437, -44.43920745490378],
+                {"bubblingMouseEvents": true, "color": "#9c27b0", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#9c27b0", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 13.469389692905848, "stroke": true, "weight": 3}
+            ).addTo(feature_group_ed118fd0d9f9b55bccee5e236175d05e);
+        
+    
+            circle_marker_6e217f5515d5c57cb0894554aa99e5cb.bindTooltip(
+                `<div>
+                     
+    <h4>State: MG</h4>
+    <b>⭐ Opp Score: 0.058</b><br>
+    📦 Demand: 13100<br>
+    😊 Avg Rating: 4.09
+    
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_4fa453ed8f4b2ba64aa302d742e119e7 = L.circleMarker(
+                [-20.74934508406467, -54.44409803876795],
+                {"bubblingMouseEvents": true, "color": "#4682b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4682b4", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.258183101726072, "stroke": true, "weight": 3}
+            ).addTo(feature_group_ed118fd0d9f9b55bccee5e236175d05e);
+        
+    
+            circle_marker_4fa453ed8f4b2ba64aa302d742e119e7.bindTooltip(
+                `<div>
+                     
+    <h4>State: MS</h4>
+    <b>⭐ Opp Score: 0.004</b><br>
+    📦 Demand: 829<br>
+    😊 Avg Rating: 4.05
+    
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c9de99868f0542631d1fe73913a091db = L.circleMarker(
+                [-14.377764929600081, -55.7504571548984],
+                {"bubblingMouseEvents": true, "color": "#4682b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4682b4", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.46292148173932, "stroke": true, "weight": 3}
+            ).addTo(feature_group_ed118fd0d9f9b55bccee5e236175d05e);
+        
+    
+            circle_marker_c9de99868f0542631d1fe73913a091db.bindTooltip(
+                `<div>
+                     
+    <h4>State: MT</h4>
+    <b>⭐ Opp Score: 0.008</b><br>
+    📦 Demand: 1044<br>
+    😊 Avg Rating: 3.98
+    
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_bfc76e9057f75d384715683bec88e33a = L.circleMarker(
+                [-2.4085513836712416, -49.0834843221631],
+                {"bubblingMouseEvents": true, "color": "#4682b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4682b4", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.856584238603054, "stroke": true, "weight": 3}
+            ).addTo(feature_group_ed118fd0d9f9b55bccee5e236175d05e);
+        
+    
+            circle_marker_bfc76e9057f75d384715683bec88e33a.bindTooltip(
+                `<div>
+                     
+    <h4>State: PA</h4>
+    <b>⭐ Opp Score: 0.014</b><br>
+    📦 Demand: 1064<br>
+    😊 Avg Rating: 3.79
+    
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f68cf7e87b305c5bd91e378cb6d1e300 = L.circleMarker(
+                [-7.087990320489705, -35.61652648790981],
+                {"bubblingMouseEvents": true, "color": "#4682b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4682b4", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.240193980952492, "stroke": true, "weight": 3}
+            ).addTo(feature_group_ed118fd0d9f9b55bccee5e236175d05e);
+        
+    
+            circle_marker_f68cf7e87b305c5bd91e378cb6d1e300.bindTooltip(
+                `<div>
+                     
+    <h4>State: PB</h4>
+    <b>⭐ Opp Score: 0.004</b><br>
+    📦 Demand: 594<br>
+    😊 Avg Rating: 4.00
+    
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_35d46e44903b39087563dcd811b862f5 = L.circleMarker(
+                [-8.1947372659734, -35.766598366817455],
+                {"bubblingMouseEvents": true, "color": "#4682b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4682b4", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.906467972280884, "stroke": true, "weight": 3}
+            ).addTo(feature_group_ed118fd0d9f9b55bccee5e236175d05e);
+        
+    
+            circle_marker_35d46e44903b39087563dcd811b862f5.bindTooltip(
+                `<div>
+                     
+    <h4>State: PE</h4>
+    <b>⭐ Opp Score: 0.015</b><br>
+    📦 Demand: 1792<br>
+    😊 Avg Rating: 3.96
+    
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_949b0936ab642504382d2dee190ba843 = L.circleMarker(
+                [-5.533798014503708, -42.59894315504948],
+                {"bubblingMouseEvents": true, "color": "#4682b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4682b4", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.310170183916112, "stroke": true, "weight": 3}
+            ).addTo(feature_group_ed118fd0d9f9b55bccee5e236175d05e);
+        
+    
+            circle_marker_949b0936ab642504382d2dee190ba843.bindTooltip(
+                `<div>
+                     
+    <h4>State: PI</h4>
+    <b>⭐ Opp Score: 0.005</b><br>
+    📦 Demand: 535<br>
+    😊 Avg Rating: 3.90
+    
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e970cdbafa09c142cddb87a17a993100 = L.circleMarker(
+                [-24.792963520092677, -50.78029371700814],
+                {"bubblingMouseEvents": true, "color": "#4682b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4682b4", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 11.322189363629487, "stroke": true, "weight": 3}
+            ).addTo(feature_group_ed118fd0d9f9b55bccee5e236175d05e);
+        
+    
+            circle_marker_e970cdbafa09c142cddb87a17a993100.bindTooltip(
+                `<div>
+                     
+    <h4>State: PR</h4>
+    <b>⭐ Opp Score: 0.022</b><br>
+    📦 Demand: 5725<br>
+    😊 Avg Rating: 4.10
+    
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_814e7272ae6e872f6cb0ab048dc59d5e = L.circleMarker(
+                [-22.756395174016212, -43.17504686937467],
+                {"bubblingMouseEvents": true, "color": "#ffd700", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffd700", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 27.655412048427333, "stroke": true, "weight": 3}
+            ).addTo(feature_group_ed118fd0d9f9b55bccee5e236175d05e);
+        
+    
+            circle_marker_814e7272ae6e872f6cb0ab048dc59d5e.bindTooltip(
+                `<div>
+                     
+    <h4>State: RJ</h4>
+    <b>⭐ Opp Score: 0.294</b><br>
+    📦 Demand: 14455<br>
+    😊 Avg Rating: 3.81
+    
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0a597a45bacd019d4106cb3924a53188 = L.circleMarker(
+                [-5.836066164151715, -35.925705800107956],
+                {"bubblingMouseEvents": true, "color": "#4682b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4682b4", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.135691579823305, "stroke": true, "weight": 3}
+            ).addTo(feature_group_ed118fd0d9f9b55bccee5e236175d05e);
+        
+    
+            circle_marker_0a597a45bacd019d4106cb3924a53188.bindTooltip(
+                `<div>
+                     
+    <h4>State: RN</h4>
+    <b>⭐ Opp Score: 0.002</b><br>
+    📦 Demand: 525<br>
+    😊 Avg Rating: 4.08
+    
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b4896973dcffc97a904ef48c7b17bee6 = L.circleMarker(
+                [-10.13601057111875, -62.83637548425774],
+                {"bubblingMouseEvents": true, "color": "#4682b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4682b4", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.090978183019452, "stroke": true, "weight": 3}
+            ).addTo(feature_group_ed118fd0d9f9b55bccee5e236175d05e);
+        
+    
+            circle_marker_b4896973dcffc97a904ef48c7b17bee6.bindTooltip(
+                `<div>
+                     
+    <h4>State: RO</h4>
+    <b>⭐ Opp Score: 0.002</b><br>
+    📦 Demand: 275<br>
+    😊 Avg Rating: 4.01
+    
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_eb9ae2a6506f5c17f33fcf8d2b756bd6 = L.circleMarker(
+                [2.834404095619739, -60.67707258876818],
+                {"bubblingMouseEvents": true, "color": "#4682b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4682b4", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.0, "stroke": true, "weight": 3}
+            ).addTo(feature_group_ed118fd0d9f9b55bccee5e236175d05e);
+        
+    
+            circle_marker_eb9ae2a6506f5c17f33fcf8d2b756bd6.bindTooltip(
+                `<div>
+                     
+    <h4>State: RR</h4>
+    <b>⭐ Opp Score: 0.000</b><br>
+    📦 Demand: 52<br>
+    😊 Avg Rating: 3.58
+    
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_20cc953bb52ffb2757fb35a49c74b21a = L.circleMarker(
+                [-29.71084642275431, -51.95321446518232],
+                {"bubblingMouseEvents": true, "color": "#4682b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4682b4", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12.055947839199101, "stroke": true, "weight": 3}
+            ).addTo(feature_group_ed118fd0d9f9b55bccee5e236175d05e);
+        
+    
+            circle_marker_20cc953bb52ffb2757fb35a49c74b21a.bindTooltip(
+                `<div>
+                     
+    <h4>State: RS</h4>
+    <b>⭐ Opp Score: 0.034</b><br>
+    📦 Demand: 6261<br>
+    😊 Avg Rating: 4.05
+    
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_152232ad71c4ea57705a93777e44b0d7 = L.circleMarker(
+                [-27.247531562634602, -49.57379005870357],
+                {"bubblingMouseEvents": true, "color": "#4682b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4682b4", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 11.766374318871339, "stroke": true, "weight": 3}
+            ).addTo(feature_group_ed118fd0d9f9b55bccee5e236175d05e);
+        
+    
+            circle_marker_152232ad71c4ea57705a93777e44b0d7.bindTooltip(
+                `<div>
+                     
+    <h4>State: SC</h4>
+    <b>⭐ Opp Score: 0.029</b><br>
+    📦 Demand: 4156<br>
+    😊 Avg Rating: 4.00
+    
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_9516b5980462555a5d76d5e8c5246529 = L.circleMarker(
+                [-10.869456899261065, -37.1716593041677],
+                {"bubblingMouseEvents": true, "color": "#4682b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4682b4", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.249278029466447, "stroke": true, "weight": 3}
+            ).addTo(feature_group_ed118fd0d9f9b55bccee5e236175d05e);
+        
+    
+            circle_marker_9516b5980462555a5d76d5e8c5246529.bindTooltip(
+                `<div>
+                     
+    <h4>State: SE</h4>
+    <b>⭐ Opp Score: 0.004</b><br>
+    📦 Demand: 382<br>
+    😊 Avg Rating: 3.84
+    
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_18066c18218fa916ba2a3a9e091ecfba = L.circleMarker(
+                [-23.16639945041646, -47.04705120191024],
+                {"bubblingMouseEvents": true, "color": "#9c27b0", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#9c27b0", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18.856994985068162, "stroke": true, "weight": 3}
+            ).addTo(feature_group_ed118fd0d9f9b55bccee5e236175d05e);
+        
+    
+            circle_marker_18066c18218fa916ba2a3a9e091ecfba.bindTooltip(
+                `<div>
+                     
+    <h4>State: SP</h4>
+    <b>⭐ Opp Score: 0.148</b><br>
+    📦 Demand: 47383<br>
+    😊 Avg Rating: 4.13
+    
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_04cfe55c5da0a81e136ec3d1bb4dd4ca = L.circleMarker(
+                [-9.750721030945575, -48.36419014293379],
+                {"bubblingMouseEvents": true, "color": "#4682b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4682b4", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.059881688608774, "stroke": true, "weight": 3}
+            ).addTo(feature_group_ed118fd0d9f9b55bccee5e236175d05e);
+        
+    
+            circle_marker_04cfe55c5da0a81e136ec3d1bb4dd4ca.bindTooltip(
+                `<div>
+                     
+    <h4>State: TO</h4>
+    <b>⭐ Opp Score: 0.001</b><br>
+    📦 Demand: 313<br>
+    😊 Avg Rating: 4.11
+    
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            feature_group_ed118fd0d9f9b55bccee5e236175d05e.addTo(map_7c58647bc8757abbad4ffe77c8e02622);
+        
+    
+            var feature_group_7953199401acb1e05e85b8b2d6868eac = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_2240f952ff761deba7ea99c533ed0908 = L.marker(
+                [-9.618440411162295, -36.03919702529452],
+                {
+}
+            ).addTo(feature_group_7953199401acb1e05e85b8b2d6868eac);
+        
+    
+            var icon_58a68e98ab9a46ad0e4ea1ed103cc300 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "exclamation-triangle",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_2240f952ff761deba7ea99c533ed0908.bindTooltip(
+                `<div>
+                     <b>⚠️ Risk Alert (AL)</b><br>여유 기간: 7.8일<br>전략: 안심 배송일 안내 (Safe Promise)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_2240f952ff761deba7ea99c533ed0908.setIcon(icon_58a68e98ab9a46ad0e4ea1ed103cc300);
+            
+    
+            var marker_734496427da35b36eac090cb87fcf60e = L.marker(
+                [-13.02536382591919, -39.46903492818187],
+                {
+}
+            ).addTo(feature_group_7953199401acb1e05e85b8b2d6868eac);
+        
+    
+            var icon_983692062faa6ba359b95cc123c73464 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "exclamation-triangle",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_734496427da35b36eac090cb87fcf60e.bindTooltip(
+                `<div>
+                     <b>⚠️ Risk Alert (BA)</b><br>여유 기간: 10.1일<br>전략: 안심 배송일 안내 (Safe Promise)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_734496427da35b36eac090cb87fcf60e.setIcon(icon_983692062faa6ba359b95cc123c73464);
+            
+    
+            var marker_1dc2a141fb9c076d48c8ec7e58d0734c = L.marker(
+                [-4.328533932939406, -38.959713567837426],
+                {
+}
+            ).addTo(feature_group_7953199401acb1e05e85b8b2d6868eac);
+        
+    
+            var icon_fbec69f6ff2313c110b6f70c59d56927 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "exclamation-triangle",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_1dc2a141fb9c076d48c8ec7e58d0734c.bindTooltip(
+                `<div>
+                     <b>⚠️ Risk Alert (CE)</b><br>여유 기간: 10.1일<br>전략: 안심 배송일 안내 (Safe Promise)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_1dc2a141fb9c076d48c8ec7e58d0734c.setIcon(icon_fbec69f6ff2313c110b6f70c59d56927);
+            
+    
+            var marker_3b5e011d72f1e39b5a097d1621d70b3f = L.marker(
+                [-15.810474939565314, -47.970559637658354],
+                {
+}
+            ).addTo(feature_group_7953199401acb1e05e85b8b2d6868eac);
+        
+    
+            var icon_f0e7d054ca8716159341e7468aeacbd2 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "exclamation-triangle",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_3b5e011d72f1e39b5a097d1621d70b3f.bindTooltip(
+                `<div>
+                     <b>⚠️ Risk Alert (DF)</b><br>여유 기간: 11.2일<br>전략: 안심 배송일 안내 (Safe Promise)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_3b5e011d72f1e39b5a097d1621d70b3f.setIcon(icon_f0e7d054ca8716159341e7468aeacbd2);
+            
+    
+            var marker_8f39ebf91e084e265be7ff166e133489 = L.marker(
+                [-20.143974897208146, -40.491591293904825],
+                {
+}
+            ).addTo(feature_group_7953199401acb1e05e85b8b2d6868eac);
+        
+    
+            var icon_69b6f7c2f3d51ef96b29e959e170780c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "exclamation-triangle",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_8f39ebf91e084e265be7ff166e133489.bindTooltip(
+                `<div>
+                     <b>⚠️ Risk Alert (ES)</b><br>여유 기간: 9.9일<br>전략: 안심 배송일 안내 (Safe Promise)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_8f39ebf91e084e265be7ff166e133489.setIcon(icon_69b6f7c2f3d51ef96b29e959e170780c);
+            
+    
+            var marker_c2a43985c9a51f0aa3fe812144993abb = L.marker(
+                [-16.616165551852177, -49.32636957183859],
+                {
+}
+            ).addTo(feature_group_7953199401acb1e05e85b8b2d6868eac);
+        
+    
+            var icon_9a27aa89270305106a93e377ea89145e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "exclamation-triangle",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_c2a43985c9a51f0aa3fe812144993abb.bindTooltip(
+                `<div>
+                     <b>⚠️ Risk Alert (GO)</b><br>여유 기간: 11.3일<br>전략: 안심 배송일 안내 (Safe Promise)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_c2a43985c9a51f0aa3fe812144993abb.setIcon(icon_9a27aa89270305106a93e377ea89145e);
+            
+    
+            var marker_23de60c68d89768bf935316225c6c0d0 = L.marker(
+                [-3.5795040474073514, -44.691816568308205],
+                {
+}
+            ).addTo(feature_group_7953199401acb1e05e85b8b2d6868eac);
+        
+    
+            var icon_3e28e16d40b5da21e5f0d1cb176e42d3 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "exclamation-triangle",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_23de60c68d89768bf935316225c6c0d0.bindTooltip(
+                `<div>
+                     <b>⚠️ Risk Alert (MA)</b><br>여유 기간: 9.2일<br>전략: 안심 배송일 안내 (Safe Promise)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_23de60c68d89768bf935316225c6c0d0.setIcon(icon_3e28e16d40b5da21e5f0d1cb176e42d3);
+            
+    
+            var marker_38a38df12b0a2967343faed1d5cfa894 = L.marker(
+                [-20.74934508406467, -54.44409803876795],
+                {
+}
+            ).addTo(feature_group_7953199401acb1e05e85b8b2d6868eac);
+        
+    
+            var icon_29f7913b07e39a64229462fd3c403849 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "exclamation-triangle",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_38a38df12b0a2967343faed1d5cfa894.bindTooltip(
+                `<div>
+                     <b>⚠️ Risk Alert (MS)</b><br>여유 기간: 10.2일<br>전략: 안심 배송일 안내 (Safe Promise)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_38a38df12b0a2967343faed1d5cfa894.setIcon(icon_29f7913b07e39a64229462fd3c403849);
+            
+    
+            var marker_f71f3c18affad9da008c755a18e81359 = L.marker(
+                [-5.533798014503708, -42.59894315504948],
+                {
+}
+            ).addTo(feature_group_7953199401acb1e05e85b8b2d6868eac);
+        
+    
+            var icon_2c9be57c23f1271b9008e2d94ba01184 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "exclamation-triangle",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_f71f3c18affad9da008c755a18e81359.bindTooltip(
+                `<div>
+                     <b>⚠️ Risk Alert (PI)</b><br>여유 기간: 10.5일<br>전략: 안심 배송일 안내 (Safe Promise)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_f71f3c18affad9da008c755a18e81359.setIcon(icon_2c9be57c23f1271b9008e2d94ba01184);
+            
+    
+            var marker_74cb5a6c4150307beb25f791236815d9 = L.marker(
+                [-22.756395174016212, -43.17504686937467],
+                {
+}
+            ).addTo(feature_group_7953199401acb1e05e85b8b2d6868eac);
+        
+    
+            var icon_b4ba2f98149c40411f657acc322948dd = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "exclamation-triangle",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_74cb5a6c4150307beb25f791236815d9.bindTooltip(
+                `<div>
+                     <b>⚠️ Risk Alert (RJ)</b><br>여유 기간: 11.1일<br>전략: 안심 배송일 안내 (Safe Promise)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_74cb5a6c4150307beb25f791236815d9.setIcon(icon_b4ba2f98149c40411f657acc322948dd);
+            
+    
+            var marker_2a0ed9ed404cbfc1ad1624f31c96cd5c = L.marker(
+                [-27.247531562634602, -49.57379005870357],
+                {
+}
+            ).addTo(feature_group_7953199401acb1e05e85b8b2d6868eac);
+        
+    
+            var icon_a41a5b0aaca806748fb7a008714867a7 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "exclamation-triangle",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_2a0ed9ed404cbfc1ad1624f31c96cd5c.bindTooltip(
+                `<div>
+                     <b>⚠️ Risk Alert (SC)</b><br>여유 기간: 10.7일<br>전략: 안심 배송일 안내 (Safe Promise)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_2a0ed9ed404cbfc1ad1624f31c96cd5c.setIcon(icon_a41a5b0aaca806748fb7a008714867a7);
+            
+    
+            var marker_a15a017cf906b97d87eb7fd219a78b79 = L.marker(
+                [-10.869456899261065, -37.1716593041677],
+                {
+}
+            ).addTo(feature_group_7953199401acb1e05e85b8b2d6868eac);
+        
+    
+            var icon_0e362c3ff371c65436e5a4733b81c079 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "exclamation-triangle",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_a15a017cf906b97d87eb7fd219a78b79.bindTooltip(
+                `<div>
+                     <b>⚠️ Risk Alert (SE)</b><br>여유 기간: 9.1일<br>전략: 안심 배송일 안내 (Safe Promise)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_a15a017cf906b97d87eb7fd219a78b79.setIcon(icon_0e362c3ff371c65436e5a4733b81c079);
+            
+    
+            var marker_032c055f31afa1485570020ec17830c1 = L.marker(
+                [-23.16639945041646, -47.04705120191024],
+                {
+}
+            ).addTo(feature_group_7953199401acb1e05e85b8b2d6868eac);
+        
+    
+            var icon_b8e38b51b34a0f4e264e48d9a620d16f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "exclamation-triangle",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_032c055f31afa1485570020ec17830c1.bindTooltip(
+                `<div>
+                     <b>⚠️ Risk Alert (SP)</b><br>여유 기간: 10.2일<br>전략: 안심 배송일 안내 (Safe Promise)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_032c055f31afa1485570020ec17830c1.setIcon(icon_b8e38b51b34a0f4e264e48d9a620d16f);
+            
+    
+            var marker_b4748ad6ab9e6becab2273eefb2a4dbb = L.marker(
+                [-9.750721030945575, -48.36419014293379],
+                {
+}
+            ).addTo(feature_group_7953199401acb1e05e85b8b2d6868eac);
+        
+    
+            var icon_06e8aabfa6f445209d2f79574c995258 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "exclamation-triangle",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_b4748ad6ab9e6becab2273eefb2a4dbb.bindTooltip(
+                `<div>
+                     <b>⚠️ Risk Alert (TO)</b><br>여유 기간: 11.3일<br>전략: 안심 배송일 안내 (Safe Promise)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_b4748ad6ab9e6becab2273eefb2a4dbb.setIcon(icon_06e8aabfa6f445209d2f79574c995258);
+            
+    
+            var feature_group_5afe3b66fa9f1daaa4e8d46cf2ed3a79 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_4ebb843d1a4b900c6203d1f5750fa6ed = L.marker(
+                [-9.440727717367688, -67.54851602006708],
+                {
+}
+            ).addTo(feature_group_5afe3b66fa9f1daaa4e8d46cf2ed3a79);
+        
+    
+            var icon_2321f4ad934e3a1f007dc8e9138a9e24 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "money",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_4ebb843d1a4b900c6203d1f5750fa6ed.bindTooltip(
+                `<div>
+                     <b>💰 Cost Alert (AC)</b><br>배송비 비율: 0.51<br>전략: 묶음 배송 (Bundling)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_4ebb843d1a4b900c6203d1f5750fa6ed.setIcon(icon_2321f4ad934e3a1f007dc8e9138a9e24);
+            
+    
+            var marker_7302f58c98dffd4f995a3c898ed2b834 = L.marker(
+                [-9.118440411162295, -35.53919702529452],
+                {
+}
+            ).addTo(feature_group_5afe3b66fa9f1daaa4e8d46cf2ed3a79);
+        
+    
+            var icon_f37bc50586c81d2da2d44c482411b987 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "money",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_7302f58c98dffd4f995a3c898ed2b834.bindTooltip(
+                `<div>
+                     <b>💰 Cost Alert (AL)</b><br>배송비 비율: 0.48<br>전략: 묶음 배송 (Bundling)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_7302f58c98dffd4f995a3c898ed2b834.setIcon(icon_f37bc50586c81d2da2d44c482411b987);
+            
+    
+            var marker_dcad98a35dc90e5805b30735dfa9dcbf = L.marker(
+                [-2.701189646612719, -59.56063565408504],
+                {
+}
+            ).addTo(feature_group_5afe3b66fa9f1daaa4e8d46cf2ed3a79);
+        
+    
+            var icon_91398f579859585daa7bdb6172c8e720 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "money",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_dcad98a35dc90e5805b30735dfa9dcbf.bindTooltip(
+                `<div>
+                     <b>💰 Cost Alert (AM)</b><br>배송비 비율: 0.50<br>전략: 묶음 배송 (Bundling)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_dcad98a35dc90e5805b30735dfa9dcbf.setIcon(icon_91398f579859585daa7bdb6172c8e720);
+            
+    
+            var marker_302c572d5ecf6b829df36889192e7fc5 = L.marker(
+                [-3.828533932939406, -38.459713567837426],
+                {
+}
+            ).addTo(feature_group_5afe3b66fa9f1daaa4e8d46cf2ed3a79);
+        
+    
+            var icon_0f6e6e044bb02a50f717234d1218b421 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "money",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_302c572d5ecf6b829df36889192e7fc5.bindTooltip(
+                `<div>
+                     <b>💰 Cost Alert (CE)</b><br>배송비 비율: 0.43<br>전략: 묶음 배송 (Bundling)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_302c572d5ecf6b829df36889192e7fc5.setIcon(icon_0f6e6e044bb02a50f717234d1218b421);
+            
+    
+            var marker_327e6531ae6ccb8076978cb6d16560a0 = L.marker(
+                [-3.0795040474073514, -44.191816568308205],
+                {
+}
+            ).addTo(feature_group_5afe3b66fa9f1daaa4e8d46cf2ed3a79);
+        
+    
+            var icon_2c6a591661d14a741c1e836cdce0296b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "money",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_327e6531ae6ccb8076978cb6d16560a0.bindTooltip(
+                `<div>
+                     <b>💰 Cost Alert (MA)</b><br>배송비 비율: 0.55<br>전략: 묶음 배송 (Bundling)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_327e6531ae6ccb8076978cb6d16560a0.setIcon(icon_2c6a591661d14a741c1e836cdce0296b);
+            
+    
+            var marker_fb0c6375c4367417c5c92a553939b0a2 = L.marker(
+                [-1.9085513836712416, -48.5834843221631],
+                {
+}
+            ).addTo(feature_group_5afe3b66fa9f1daaa4e8d46cf2ed3a79);
+        
+    
+            var icon_6c6b0b7809943a11d35258ceb0600d0b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "money",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_fb0c6375c4367417c5c92a553939b0a2.bindTooltip(
+                `<div>
+                     <b>💰 Cost Alert (PA)</b><br>배송비 비율: 0.48<br>전략: 묶음 배송 (Bundling)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_fb0c6375c4367417c5c92a553939b0a2.setIcon(icon_6c6b0b7809943a11d35258ceb0600d0b);
+            
+    
+            var marker_e3f13b14e301a72841799aff7479201a = L.marker(
+                [-6.587990320489705, -35.11652648790981],
+                {
+}
+            ).addTo(feature_group_5afe3b66fa9f1daaa4e8d46cf2ed3a79);
+        
+    
+            var icon_80f797777583de6c9a079e84178983e0 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "money",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_e3f13b14e301a72841799aff7479201a.bindTooltip(
+                `<div>
+                     <b>💰 Cost Alert (PB)</b><br>배송비 비율: 0.51<br>전략: 묶음 배송 (Bundling)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_e3f13b14e301a72841799aff7479201a.setIcon(icon_80f797777583de6c9a079e84178983e0);
+            
+    
+            var marker_67f659f30c7e5ff4f01b3537a0162110 = L.marker(
+                [-7.6947372659734, -35.266598366817455],
+                {
+}
+            ).addTo(feature_group_5afe3b66fa9f1daaa4e8d46cf2ed3a79);
+        
+    
+            var icon_cc2caf68f5c3a340d856a72aa7ed8c05 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "money",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_67f659f30c7e5ff4f01b3537a0162110.bindTooltip(
+                `<div>
+                     <b>💰 Cost Alert (PE)</b><br>배송비 비율: 0.45<br>전략: 묶음 배송 (Bundling)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_67f659f30c7e5ff4f01b3537a0162110.setIcon(icon_cc2caf68f5c3a340d856a72aa7ed8c05);
+            
+    
+            var marker_fd9615cd9e42d9fefae4bf2708e57022 = L.marker(
+                [-5.033798014503708, -42.09894315504948],
+                {
+}
+            ).addTo(feature_group_5afe3b66fa9f1daaa4e8d46cf2ed3a79);
+        
+    
+            var icon_e7eff5799e1f665b018e5fdf51392a6f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "money",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_fd9615cd9e42d9fefae4bf2708e57022.bindTooltip(
+                `<div>
+                     <b>💰 Cost Alert (PI)</b><br>배송비 비율: 0.50<br>전략: 묶음 배송 (Bundling)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_fd9615cd9e42d9fefae4bf2708e57022.setIcon(icon_e7eff5799e1f665b018e5fdf51392a6f);
+            
+    
+            var marker_62297915c9b43f6674516e06290e1d3f = L.marker(
+                [-5.336066164151715, -35.425705800107956],
+                {
+}
+            ).addTo(feature_group_5afe3b66fa9f1daaa4e8d46cf2ed3a79);
+        
+    
+            var icon_c2d106db79e597541905ed0d2f6e1bb9 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "money",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_62297915c9b43f6674516e06290e1d3f.bindTooltip(
+                `<div>
+                     <b>💰 Cost Alert (RN)</b><br>배송비 비율: 0.51<br>전략: 묶음 배송 (Bundling)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_62297915c9b43f6674516e06290e1d3f.setIcon(icon_c2d106db79e597541905ed0d2f6e1bb9);
+            
+    
+            var marker_ed3673af9485c2ecd65de6be6e71ee76 = L.marker(
+                [-9.63601057111875, -62.33637548425774],
+                {
+}
+            ).addTo(feature_group_5afe3b66fa9f1daaa4e8d46cf2ed3a79);
+        
+    
+            var icon_2131cc0db13336d4ac252cf1c650b17f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "money",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_ed3673af9485c2ecd65de6be6e71ee76.bindTooltip(
+                `<div>
+                     <b>💰 Cost Alert (RO)</b><br>배송비 비율: 0.60<br>전략: 묶음 배송 (Bundling)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_ed3673af9485c2ecd65de6be6e71ee76.setIcon(icon_2131cc0db13336d4ac252cf1c650b17f);
+            
+    
+            var marker_ea2e57c76f6fe8094c58742f5bc71068 = L.marker(
+                [3.334404095619739, -60.17707258876818],
+                {
+}
+            ).addTo(feature_group_5afe3b66fa9f1daaa4e8d46cf2ed3a79);
+        
+    
+            var icon_a920e30390f55db89ea1a324487365f1 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "money",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_ea2e57c76f6fe8094c58742f5bc71068.bindTooltip(
+                `<div>
+                     <b>💰 Cost Alert (RR)</b><br>배송비 비율: 0.59<br>전략: 묶음 배송 (Bundling)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_ea2e57c76f6fe8094c58742f5bc71068.setIcon(icon_a920e30390f55db89ea1a324487365f1);
+            
+    
+            var marker_21afbbf5760c4de53b5f56d0c5d19cba = L.marker(
+                [-10.369456899261065, -36.6716593041677],
+                {
+}
+            ).addTo(feature_group_5afe3b66fa9f1daaa4e8d46cf2ed3a79);
+        
+    
+            var icon_0f8187495a56dcc9ee463d1fcf03bd14 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "money",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_21afbbf5760c4de53b5f56d0c5d19cba.bindTooltip(
+                `<div>
+                     <b>💰 Cost Alert (SE)</b><br>배송비 비율: 0.47<br>전략: 묶음 배송 (Bundling)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_21afbbf5760c4de53b5f56d0c5d19cba.setIcon(icon_0f8187495a56dcc9ee463d1fcf03bd14);
+            
+    
+            var marker_8ebd8eca818e7d686179556ce7f914b9 = L.marker(
+                [-9.250721030945575, -47.86419014293379],
+                {
+}
+            ).addTo(feature_group_5afe3b66fa9f1daaa4e8d46cf2ed3a79);
+        
+    
+            var icon_1ff77639ebe8244e1d6331e7ec30675e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "money",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_8ebd8eca818e7d686179556ce7f914b9.bindTooltip(
+                `<div>
+                     <b>💰 Cost Alert (TO)</b><br>배송비 비율: 0.50<br>전략: 묶음 배송 (Bundling)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_8ebd8eca818e7d686179556ce7f914b9.setIcon(icon_1ff77639ebe8244e1d6331e7ec30675e);
+            
+    
+            var layer_control_ae7d29b9744a5c9390d93f7aa4b66082_layers = {
+                base_layers : {
+                    "cartodbdarkmatter" : tile_layer_0bbb78f145e5b76fd2436911eef70948,
+                },
+                overlays :  {
+                    "1. \uae30\ud68c \uc810\uc218 (Opportunity)" : feature_group_ed118fd0d9f9b55bccee5e236175d05e,
+                    "2. \ubc30\uc1a1 \uc704\ud5d8 (Reliability)" : feature_group_7953199401acb1e05e85b8b2d6868eac,
+                    "3. \uace0\ube44\uc6a9 \uc9c0\uc5ed (Bundling)" : feature_group_5afe3b66fa9f1daaa4e8d46cf2ed3a79,
+                },
+            };
+            let layer_control_ae7d29b9744a5c9390d93f7aa4b66082 = L.control.layers(
+                layer_control_ae7d29b9744a5c9390d93f7aa4b66082_layers.base_layers,
+                layer_control_ae7d29b9744a5c9390d93f7aa4b66082_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": false,
+  "autoZIndex": true,
+}
+            ).addTo(map_7c58647bc8757abbad4ffe77c8e02622);
+
+        
+</script>
+</html>
