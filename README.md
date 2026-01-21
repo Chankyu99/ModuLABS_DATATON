@@ -10,11 +10,11 @@
 
 1. 색깔별로 도시 분포도 시각화
 
-![1](Img/try_visulization1.png)
+![1](Img/try_visualization1.png)
 
 2. 판매자-구매자 좌표를 동시에 이용해 배송 경로 표시
 
-![2](Img/try_visulization2.png)
+![2](Img/try_visualization2.png)
 
 여기까지 일단 1월19일 분량. 시각화는 좀 더 표현을 잘 할 수 있는 방안 고려해보기
 
